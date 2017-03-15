@@ -54,9 +54,7 @@ public class Plato {
             Plato temp = new Plato();
             temp = link;
             while (temp != null) {
-                System.out.println(temp.getName());
-                System.out.println(temp.getCant());
-                System.out.println(temp.getPrec());
+                System.out.println(temp.getName()+" "+temp.getCant());
                 temp=temp.getLink();
             }
         }

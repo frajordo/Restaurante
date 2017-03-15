@@ -6,14 +6,33 @@ import java.io.FileInputStream;//Archivo
 import java.io.InputStreamReader;//Archivo
 import java.util.StringTokenizer;//Descomponer lineas
 import javax.swing.table.DefaultTableModel;//jtable
+import lab_willian_garcia_miguel_julio.Models.Mesa;
+import lab_willian_garcia_miguel_julio.Models.Mesero;
 import lab_willian_garcia_miguel_julio.Models.Plato;//lista de platos
 
 public class VMenu extends javax.swing.JFrame {
-
     Plato ptr = null;
     Plato q = null;
+    public static Mesero Empleados;
+    public static Mesa table;
 
-    public void setCombo() {
+    public VMenu(Mesero Empleados,Mesa table) {
+        initComponents();
+        setCombo();
+        jLabel1.setText(jTable1.getModel().getValueAt(0, 0).toString());
+        jLabel4.setText("$ " + jTable1.getModel().getValueAt(0, 1).toString());
+        jButton1.setEnabled(false);
+        this.Empleados=Empleados;
+        this.table=table;
+        jLabel5.setText("Mesa: "+this.table.getId());
+        jLabel6.setText(Empleados.getNombre());
+        //....//
+        Plato mesita=new Plato();
+        mesita=table.getPlatos();
+        if(mesita!=null) mesita.imprimir(mesita);
+    }
+
+        public void setCombo() {
         try {
             //Se colocan las opciones en el combobox
             FileInputStream fstream = new FileInputStream("Archivos\\Menu\\Categorias.txt");
@@ -76,20 +95,11 @@ public class VMenu extends javax.swing.JFrame {
             System.err.println("Error: " + e.getMessage());
         }
     }
-
-    public VMenu() {
-        initComponents();
-        setCombo();
-        jLabel1.setText(jTable1.getModel().getValueAt(0, 0).toString());
-        jLabel4.setText("$ " + jTable1.getModel().getValueAt(0, 1).toString());
-        jButton1.setEnabled(false);
-    }
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jComboBox1 = new javax.swing.JComboBox<String>();
+        jComboBox1 = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
@@ -101,6 +111,8 @@ public class VMenu extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -182,6 +194,10 @@ public class VMenu extends javax.swing.JFrame {
             }
         });
 
+        jLabel5.setText("jLabel5");
+
+        jLabel6.setText("jLabel6");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -190,7 +206,11 @@ public class VMenu extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(115, 115, 115)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(187, 187, 187)
+                        .addComponent(jLabel6))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -212,7 +232,10 @@ public class VMenu extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel6))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
@@ -245,7 +268,7 @@ public class VMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        VMesero v1 = new VMesero();
+        VMesero v1 = new VMesero(Empleados,lab_willian_garcia_miguel_julio.Restaurante.LaPros);
         v1.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -265,11 +288,9 @@ public class VMenu extends javax.swing.JFrame {
                 ptr = p;
                 q = p;
                 jLabel3.setText((Integer.parseInt(jLabel3.getText()) + 1) + "");
-                System.out.println(":)");
             } else {
                 p.setLink(ptr);
                 ptr = p;
-                System.out.println("Nodo creado");
                 jLabel3.setText((Integer.parseInt(jLabel3.getText()) + 1) + "");
             }
             if (!jLabel3.getText().equals("0")) {
@@ -279,7 +300,16 @@ public class VMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        ptr.imprimir(ptr);
+    if(table.getPlatos()==null)//orden de tomar mesa
+        table.setPlatos(ptr);
+    else
+        table.añadirPlatos(ptr);//orden de añadir
+    VMesero v1 = new VMesero(Empleados,lab_willian_garcia_miguel_julio.Restaurante.LaPros);
+    Empleados.setId(this.table.getId());
+    table.setMesero(Empleados.getNombre());
+    table.getPlatos().imprimir(table.getPlatos().getLink());
+    v1.setVisible(true);
+    this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     public static void main(String args[]) {
@@ -310,7 +340,7 @@ public class VMenu extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VMenu().setVisible(true);
+                new VMenu(Empleados,table).setVisible(true);
             }
         });
     }
@@ -324,9 +354,12 @@ public class VMenu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSpinner jSpinner1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }
+

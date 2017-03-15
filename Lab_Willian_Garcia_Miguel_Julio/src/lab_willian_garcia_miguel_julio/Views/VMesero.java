@@ -1,10 +1,16 @@
 
 package lab_willian_garcia_miguel_julio.Views;
 
-public class VMesero extends javax.swing.JFrame {
+import lab_willian_garcia_miguel_julio.Models.Mesero;
+import lab_willian_garcia_miguel_julio.Restaurante;
 
-    public VMesero() {
+public class VMesero extends javax.swing.JFrame {
+    public static Mesero Empleado;
+    public static Restaurante rest;
+    public VMesero(Mesero Empleado,Restaurante rest) {
         initComponents();
+        this.Empleado=Empleado;
+        this.rest=rest;
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -54,7 +60,7 @@ public class VMesero extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(jButton1)
-                        .addGap(18, 18, 18)
+                        .addGap(43, 43, 43)
                         .addComponent(jButton2))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -72,7 +78,7 @@ public class VMesero extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel2))))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -99,14 +105,10 @@ public class VMesero extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Esc_Mesa v1= new Esc_Mesa();
+        Esc_Mesa v1= new Esc_Mesa(Empleado,rest);
         v1.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -131,17 +133,11 @@ public class VMesero extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VMesero().setVisible(true);
+                new VMesero(Empleado,rest).setVisible(true);
             }
         });
     }
