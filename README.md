@@ -19,7 +19,7 @@ Los camareros consultan cuándo están los platos terminados y los recogen en la
 Las facturas se emiten cuando los clientes piden la cuenta. El precio de los productos consumidos debe estar desglosado en la factura e incluir el IVA y la propina del 10% del total consumido.
 #### Aprovisionamiento:
 El jefe de cocina, que es uno de los cocineros, entrega a los cocineros el tipo de alimento y las unidades necesarias para cada plato del menú.
-#### :apple: :rice: :egg: Consumo de alimentos: De cada alimento (por ejemplo, carne pescado, arroz, tomate,etc):egg: :rice: :apple: :
+#### :apple: :rice: :egg: Consumo de alimentos: De cada alimento (por ejemplo, carne pescado, arroz, tomate,etc):egg: :rice: :apple: 
 El sistema registra el número de unidades almacenadas. Al final de cada día, el jefe de cocina ejecuta un proceso que calcula, a partir de los platos elaborados, los alimentos que se han consumido y de cuales hay que pedir porque no hay existencias.
 #### Gerente
 El gerente utiliza el sistema para realizar consultas tales como: 
