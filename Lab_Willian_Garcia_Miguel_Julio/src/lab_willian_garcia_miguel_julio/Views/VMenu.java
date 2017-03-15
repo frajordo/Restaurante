@@ -26,10 +26,6 @@ public class VMenu extends javax.swing.JFrame {
         this.table=table;
         jLabel5.setText("Mesa: "+this.table.getId());
         jLabel6.setText(Empleados.getNombre());
-        //....//
-        Plato mesita=new Plato();
-        mesita=table.getPlatos();
-        if(mesita!=null) mesita.imprimir(mesita);
     }
 
         public void setCombo() {
@@ -284,15 +280,15 @@ public class VMenu extends javax.swing.JFrame {
         /* aqui le agregamos al nodo la informacion*/
         if (Integer.parseInt(jSpinner1.getValue().toString()) > 0) {
             Plato p = new Plato(jLabel1.getText(), Integer.parseInt(jSpinner1.getValue().toString()), Float.parseFloat(jLabel4.getText().substring(2, jLabel4.getText().length())), 10);
+            
             if (ptr == null) {
                 ptr = p;
                 q = p;
-                jLabel3.setText((Integer.parseInt(jLabel3.getText()) + 1) + "");
             } else {
                 p.setLink(ptr);
                 ptr = p;
-                jLabel3.setText((Integer.parseInt(jLabel3.getText()) + 1) + "");
-            }
+             }
+            jLabel3.setText((Integer.parseInt(jLabel3.getText()) + 1) + "");
             if (!jLabel3.getText().equals("0")) {
                 jButton1.setEnabled(true);
             }
@@ -300,14 +296,19 @@ public class VMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    //ptr.imprimir(ptr);//prueba 1
+    if(lab_willian_garcia_miguel_julio.Restaurante.LaPros.getCocinaP().punteros.isEmpty()){
+        lab_willian_garcia_miguel_julio.Restaurante.LaPros.getCocinaP().añadirPlatoI(ptr,this.table.getId());
+    }else{
+        lab_willian_garcia_miguel_julio.Restaurante.LaPros.getCocinaP().añadirDespues(ptr,this.table.getId());
+    }
     if(table.getPlatos()==null)//orden de tomar mesa
         table.setPlatos(ptr);
     else
-        table.añadirPlatos(ptr);//orden de añadir
-    VMesero v1 = new VMesero(Empleados,lab_willian_garcia_miguel_julio.Restaurante.LaPros);
+        table.añadirPlatos(ptr);//orden de añadir   
     Empleados.setId(this.table.getId());
     table.setMesero(Empleados.getNombre());
-    table.getPlatos().imprimir(table.getPlatos().getLink());
+    VMesero v1 = new VMesero(Empleados,lab_willian_garcia_miguel_julio.Restaurante.LaPros);
     v1.setVisible(true);
     this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed

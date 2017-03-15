@@ -1,6 +1,4 @@
 package lab_willian_garcia_miguel_julio.Models;
-
-import java.util.ArrayList;
 public class Mesa {
 int id;
 String Mesero;

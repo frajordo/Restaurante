@@ -59,4 +59,18 @@ public class Plato {
             }
         }
     }
+     public String imprimirTexto(Plato link) {
+         String str="";
+        if (link == null) {
+            return "Lista Vacia";
+        } else {
+            Plato temp = new Plato();
+            temp = link;
+            while (temp != null) {
+                str+=temp.getName()+" "+temp.getCant()+"\n";
+                temp=temp.getLink();
+            }
+        }
+        return str;
+    }
 }
