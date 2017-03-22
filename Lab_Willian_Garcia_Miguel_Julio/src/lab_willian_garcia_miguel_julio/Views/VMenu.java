@@ -50,15 +50,16 @@ public class VMenu extends javax.swing.JFrame {
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
         try {
             //eliminar columna  //((DefaultTableModel)myJTable.getModel()).removeRow(rowToRemove);
-            FileInputStream fstream = new FileInputStream("Archivos\\Menu\\Categorias.txt");
+            
+            FileInputStream fstream = new FileInputStream("Archivos\\Menu\\Categorias.txt");//me ubico en en archivo
             DataInputStream in = new DataInputStream(fstream);
             BufferedReader br = new BufferedReader(new InputStreamReader(in));
             String strLine;
-            while ((strLine = br.readLine()) != null) {
+            while ((strLine = br.readLine()) != null) {//me muevo entre lineas
                 //todas las categorias posible
                 llenar(strLine.substring(0, strLine.length() - 1), modelo);
             }
-            in.close();
+            in.close();//cierro el archivo
         } catch (Exception e) {
             System.err.println("Error: " + e.getMessage());
         }

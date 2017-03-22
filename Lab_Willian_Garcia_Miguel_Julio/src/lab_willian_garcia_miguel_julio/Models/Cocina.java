@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class Cocina{
     Plato tplatos= new Plato();
-    public ArrayList <Plato> punteros=new ArrayList<Plato>();
-    public ArrayList <String> punterosd=new ArrayList<String>();
+    public ArrayList <Plato> punteros=new ArrayList<>();
+    public ArrayList <String> punterosd=new ArrayList<>();
     public  ArrayList identificadores=new ArrayList();
     public Cocina() {
         this.tplatos = null;
