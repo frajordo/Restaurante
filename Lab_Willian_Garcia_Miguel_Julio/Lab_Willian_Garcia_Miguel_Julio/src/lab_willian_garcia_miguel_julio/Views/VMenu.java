@@ -8,8 +8,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.InputStreamReader;//Archivo
 import java.io.PrintWriter;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.util.StringTokenizer;//Descomponer lineas
 import javax.swing.table.DefaultTableModel;//jtable
@@ -38,9 +36,8 @@ public class VMenu extends javax.swing.JFrame {
         jLabel6.setText(Empleados.getNombre());
 
         try {
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            LocalDate localDate = LocalDate.now();
-            File archivo = new File("Archivos\\Mesas\\" + localDate + " Mesa " + table.getId() + ".txt");
+
+            File archivo = new File("factura"+this.table.getId()+".txt");
 
             if (archivo.exists()) {
                 System.out.println("Archivo creado");
@@ -53,29 +50,23 @@ public class VMenu extends javax.swing.JFrame {
 
     }
 
-    public void escribirFichero(PrintWriter pw,Plato link) throws Exception {
-        if (link == null) {
-            System.out.println("Lista Vacia");
-        } else {
-            Plato temp = new Plato();
-            temp = link;
-            while (temp != null) {
-                System.out.println(temp.getName()+" "+temp.getCant());
-                pw.print(temp.getName()+";"+temp.getCant()+";"+temp.getPrec());
-                temp=temp.getLink();
-                pw.println();
-            }
-        }        
+    public void escribirFichero(PrintWriter pw) throws Exception {
+        Scanner teclado = new Scanner(System.in);
+        String opcion;
+        //System.out.println("Introduce tu nombre");
+        opcion = jLabel1.getText();
+        pw.print(opcion + "      ,  ");
+        //System.out.println("precio");
+        opcion = jLabel4.getText();
+        pw.print(opcion);
+        pw.println();
     }
 public  void ingresarFichero() {
         FileWriter fw = null;
         try {
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            LocalDate localDate = LocalDate.now();
-            File archivo = new File("Archivos\\Mesas\\" + localDate + " Mesa " + table.getId() + ".txt");
-            fw = new FileWriter(archivo,true);
+            fw = new FileWriter("factura"+this.table.getId()+".txt",true);
             PrintWriter pw = new PrintWriter(fw);
-            escribirFichero(pw,table.getPlatos());
+            escribirFichero(pw);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         } finally {
@@ -370,23 +361,19 @@ public  void ingresarFichero() {
         if (table.getPlatos() == null)//orden de tomar mesa
         {
             table.setPlatos(ptr);
-            Empleados.setId(this.table.getId());
-            table.setMesero(Empleados.getNombre());
         } else {
             table.añadirPlatos(ptr);//orden de añadir   
         }
-       //table.getPlatos().imprimir(table.getPlatos());//prueba 2      
+        Empleados.setId(this.table.getId());
+        table.setMesero(Empleados.getNombre());
         try {
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            LocalDate localDate = LocalDate.now();
-            File archivo = new File("Archivos\\Mesas\\" + localDate + " Mesa " + table.getId() + ".txt");
             if(s==0){
-            fw = new FileWriter(archivo);
+            fw = new FileWriter("factura"+this.table.getId()+".txt");
             PrintWriter pw = new PrintWriter(fw);
-            escribirFichero(pw,table.getPlatos());
+            escribirFichero(pw);
             s = 1;
             }else{
-            fw = new FileWriter(archivo);
+            fw = new FileWriter("factura"+this.table.getId()+".txt");
             PrintWriter pw = new PrintWriter(fw);
              ingresarFichero();
             s = 1;

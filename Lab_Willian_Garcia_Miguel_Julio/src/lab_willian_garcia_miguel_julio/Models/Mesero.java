@@ -14,14 +14,24 @@ int[] id=new int [5];//pensamos cambiarlo
 
     public void setId(int id) {
         for (int i = 0; i < 5; i++) {
-            if(this.id[i]==0){
+            if(this.id[i]==0 && this.id[i]!=id){
                 this.id[i]=id;
                 return;
             }
         }
     }
     
+    public void delm(int id) {
+        for (int i = 0; i < 5; i++) {
+            if(this.id[i]==id){
+                this.id[i]=0;
+                return;
+            }
+        }
+    }
+    
     public String getMesas() {
+        //Repite opciones 
         String str="";
         for (int i = 0; i < 5; i++) {
             if(id[i]!=0)str+=id[i]+",";

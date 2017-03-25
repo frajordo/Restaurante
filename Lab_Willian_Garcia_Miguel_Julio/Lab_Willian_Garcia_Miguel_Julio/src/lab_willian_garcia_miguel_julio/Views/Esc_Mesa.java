@@ -53,9 +53,7 @@ public class Esc_Mesa extends javax.swing.JFrame {
 public void mostrarFichero() {
         FileReader fr = null;
         try {
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            LocalDate localDate = LocalDate.now();
-            File fichero = new File("Archivos\\Mesas\\" + localDate + " Mesa " + jComboBox3.getSelectedItem().toString() + ".txt");
+            File fichero = new File("factura"+jComboBox3.getSelectedItem()+".txt");
             fr = new FileReader(fichero);
             BufferedReader br = new BufferedReader(fr);
             leerFichero(br);
@@ -77,8 +75,10 @@ public void mostrarFichero() {
         String linea;
         linea = br.readLine();
         while (linea != null) {
+
             System.out.println(linea);
             linea = br.readLine();
+
         }
     }
     
@@ -103,7 +103,6 @@ public void mostrarFichero() {
     private void mostrarAñadir() {
         if (!Empleado.getMesas().equals("")) {
             StringTokenizer st = new StringTokenizer(Empleado.getMesas(), ",");
-            System.out.println(Empleado.getMesas());
             while (st.hasMoreTokens()) {
                 String temp = st.nextToken();
                 jComboBox1.addItem(temp);
@@ -122,13 +121,13 @@ public void mostrarFichero() {
 
         jButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        jComboBox1 = new javax.swing.JComboBox<String>();
+        jComboBox1 = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
-        jComboBox2 = new javax.swing.JComboBox<String>();
+        jComboBox2 = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -136,7 +135,7 @@ public void mostrarFichero() {
         jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
-        jComboBox3 = new javax.swing.JComboBox<String>();
+        jComboBox3 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -144,12 +143,6 @@ public void mostrarFichero() {
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
-            }
-        });
-
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
             }
         });
 
@@ -263,11 +256,6 @@ public void mostrarFichero() {
         });
 
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { }));
-        jComboBox3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox3ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -373,23 +361,9 @@ public void mostrarFichero() {
             Logger.getLogger(Esc_Mesa.class.getName()).log(Level.SEVERE, null, ex);
         }
        */ 
-        mostrarFichero();
-        VMesero v1 = new VMesero(Empleado, rest,table);
-        rest.buscarMesa(Integer.parseInt(jComboBox3.getSelectedItem().toString())).setMesero("");
-        rest.buscarMesa(Integer.parseInt(jComboBox3.getSelectedItem().toString())).setPlatos();
-        Empleado.delm((Integer.parseInt(jComboBox3.getSelectedItem().toString())));
-        //JOptionPane.showMessageDialog(null, );
-        v1.setVisible(true);
-        this.dispose();
+        
+       mostrarFichero();
     }//GEN-LAST:event_jButton4ActionPerformed
-
-    private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox3ActionPerformed
-
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
     private void actmesas() throws IOException{
     File ftemp = new File("Archivos\\Mesas\\temp.txt");//archivo temporal
     
@@ -409,7 +383,9 @@ public void mostrarFichero() {
         }
          pwt.close();
          fwr2.close();
-       
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate localDate = LocalDate.now();
+        File f = new File("Archivos\\Mesas\\" + localDate + "Mesa" + jComboBox1.getSelectedItem().toString() + ".txt");
         /*
         try {
             File fichero = new File("archivo.txt");

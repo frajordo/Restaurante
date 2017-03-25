@@ -18,6 +18,9 @@ Plato platos;
     public void setPlatos(Plato platos) {
         this.platos = platos;
     }
+    public void setPlatos() {
+        this.platos = null;
+    }
      public void añadirPlatos(Plato platos) {
                 Plato pi = new Plato();
                 pi=platos;
