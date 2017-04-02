@@ -119,7 +119,7 @@ public class VMesero extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        DCook v1=new DCook(this.rest.getCocinaP(),Empleado );
+        DCook v1=new DCook(this.rest.getCocinaP() );
         v1.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed

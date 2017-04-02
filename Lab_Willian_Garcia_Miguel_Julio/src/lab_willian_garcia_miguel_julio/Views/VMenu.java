@@ -10,23 +10,22 @@ import java.io.InputStreamReader;//Archivo
 import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Scanner;
 import java.util.StringTokenizer;//Descomponer lineas
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;//jtable
-import lab_willian_garcia_miguel_julio.Models.Cocina;
+import lab_willian_garcia_miguel_julio.Models.JefeCocina;
 import lab_willian_garcia_miguel_julio.Models.Mesa;
 import lab_willian_garcia_miguel_julio.Models.Mesero;
 import lab_willian_garcia_miguel_julio.Models.Plato;//lista de platos
 
 public class VMenu extends javax.swing.JFrame {
-
     Plato ptr = null;
     Plato q = null;
     int s = 0;
     public static Mesero Empleados;
     public static Mesa table;
     public static FileWriter fw = null;
-    public static Cocina kook;
+    static public JefeCocina jefec = new JefeCocina();
 
     public VMenu(Mesero Empleados, Mesa table) {
         initComponents();
@@ -39,7 +38,6 @@ public class VMenu extends javax.swing.JFrame {
         this.table = table;
         jLabel5.setText("Mesa: " + this.table.getId());
         jLabel6.setText(Empleados.getNombre());
-
         try {
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             LocalDate localDate = LocalDate.now();
@@ -56,29 +54,30 @@ public class VMenu extends javax.swing.JFrame {
 
     }
 
-    public void escribirFichero(PrintWriter pw,Plato link) throws Exception {
+    public void escribirFichero(PrintWriter pw, Plato link) throws Exception {
         if (link == null) {
             System.out.println("Lista Vacia");
         } else {
             Plato temp = new Plato();
             temp = link;
             while (temp != null) {
-                System.out.println(temp.getName()+" "+temp.getCant());
-                pw.print(temp.getName()+";"+temp.getCant()+";"+temp.getPrec());
-                temp=temp.getLink();
+                System.out.println(temp.getName() + " " + temp.getCant());
+                pw.print(temp.getName() + ";" + temp.getCant() + ";" + temp.getPrec());
+                temp = temp.getLink();
                 pw.println();
             }
-        }        
+        }
     }
-public  void ingresarFichero() {
+
+    public void ingresarFichero() {
         FileWriter fw = null;
         try {
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             LocalDate localDate = LocalDate.now();
             File archivo = new File("Archivos\\Mesas\\" + localDate + " Mesa " + table.getId() + ".txt");
-            fw = new FileWriter(archivo,true);
+            fw = new FileWriter(archivo, true);
             PrintWriter pw = new PrintWriter(fw);
-            escribirFichero(pw,table.getPlatos());
+            escribirFichero(pw, table.getPlatos());
         } catch (Exception e) {
             System.out.println(e.getMessage());
         } finally {
@@ -90,11 +89,10 @@ public  void ingresarFichero() {
                 System.out.println(e.getMessage());
             }
         }
- 
-    }
-    
 
-       public void setCombo() {
+    }
+
+    public void setCombo() {
         try {
             //Se colocan las opciones en el combobox
             FileInputStream fstream = new FileInputStream("Archivos\\Menu\\Categorias.txt");
@@ -104,7 +102,9 @@ public  void ingresarFichero() {
             jComboBox1.addItem("TODAS");
             jComboBox1.setSelectedIndex(0);
             while ((strLine = br.readLine()) != null) {
-                if(!strLine.equals(""))jComboBox1.addItem(strLine.substring(0, strLine.length() - 1));
+                if (!strLine.equals("")) {
+                    jComboBox1.addItem(strLine.substring(0, strLine.length() - 1));
+                }
             }
             in.close();
         } catch (Exception e) {
@@ -121,7 +121,7 @@ public  void ingresarFichero() {
             BufferedReader br = new BufferedReader(new InputStreamReader(in));
             String strLine;
             while ((strLine = br.readLine()) != null) {
-                if(!strLine.equals("")){
+                if (!strLine.equals("")) {
                     llenar(strLine.substring(0, strLine.length() - 1), modelo);
                 }
             }
@@ -131,7 +131,7 @@ public  void ingresarFichero() {
         }
     }
 
-     public void llenar(String strLine, DefaultTableModel modelo) {
+    public void llenar(String strLine, DefaultTableModel modelo) {
         try {
             FileInputStream fss = new FileInputStream("Archivos\\Menu\\" + strLine + ".txt");
             DataInputStream in1 = new DataInputStream(fss);
@@ -322,7 +322,7 @@ public  void ingresarFichero() {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-       DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
         modelo.setRowCount(0);
         if (!jComboBox1.getSelectedItem().toString().equals("TODAS")) {
             llenar(jComboBox1.getSelectedItem().toString(), modelo);
@@ -332,7 +332,7 @@ public  void ingresarFichero() {
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        VMesero v1 = new VMesero(Empleados, lab_willian_garcia_miguel_julio.Restaurante.LaPros,table);
+        VMesero v1 = new VMesero(Empleados, lab_willian_garcia_miguel_julio.Restaurante.LaPros, table);
         v1.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -344,22 +344,29 @@ public  void ingresarFichero() {
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        /*obtenemos el plato con la cantidad y el precio y lo guardamos en las variables declaradas anteriormente*/
         /* aqui le agregamos al nodo la informacion*/
         if (Integer.parseInt(jSpinner1.getValue().toString()) > 0) {
+            //Se consulta si se puede agregar con el jefe de cocina
             //kook.consultarFichero(jComboBox1.getSelectedItem().toString(),jLabel1.getText(),jSpinner1.getValue().toString());
-            Plato p = new Plato(jLabel1.getText(), Integer.parseInt(jSpinner1.getValue().toString()), Float.parseFloat(jLabel4.getText().substring(2, jLabel4.getText().length())), 10);
-
-            if (ptr == null) {
-                ptr = p;
-                q = p;
+            String msg;
+            if(jTable1.getSelectedRow()!=-1) msg = jefec.verificar(jLabel1.getText(), jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 2).toString(), Integer.parseInt(jSpinner1.getValue().toString()));
+            else msg="No ha seleccionado un plato";
+            if (msg.equals("OK")) {
+                /*obtenemos el plato con la cantidad y el precio y lo guardamos en las variables declaradas anteriormente*/
+                Plato p = new Plato(jLabel1.getText(), Integer.parseInt(jSpinner1.getValue().toString()), Float.parseFloat(jLabel4.getText().substring(2, jLabel4.getText().length())), 10);
+                if (ptr == null) {
+                    ptr = p;
+                    q = p;
+                } else {
+                    p.setLink(ptr);
+                    ptr = p;
+                }
+                jLabel3.setText((Integer.parseInt(jLabel3.getText()) + 1) + "");
+                if (!jLabel3.getText().equals("0")) {
+                    jButton1.setEnabled(true);
+                }
             } else {
-                p.setLink(ptr);
-                ptr = p;
-            }
-            jLabel3.setText((Integer.parseInt(jLabel3.getText()) + 1) + "");
-            if (!jLabel3.getText().equals("0")) {
-                jButton1.setEnabled(true);
+                JOptionPane.showMessageDialog(null, msg);
             }
         }
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -379,23 +386,23 @@ public  void ingresarFichero() {
         } else {
             table.añadirPlatos(ptr);//orden de añadir   
         }
-       //table.getPlatos().imprimir(table.getPlatos());//prueba 2      
+        //table.getPlatos().imprimir(table.getPlatos());//prueba 2      
         try {
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             LocalDate localDate = LocalDate.now();
             File archivo = new File("Archivos\\Mesas\\" + localDate + " Mesa " + table.getId() + ".txt");
-            if(s==0){
-            fw = new FileWriter(archivo);
-            PrintWriter pw = new PrintWriter(fw);
-            escribirFichero(pw,table.getPlatos());
-            s = 1;
-            }else{
-            fw = new FileWriter(archivo);
-            PrintWriter pw = new PrintWriter(fw);
-             ingresarFichero();
-            s = 1;
+            if (s == 0) {
+                fw = new FileWriter(archivo);
+                PrintWriter pw = new PrintWriter(fw);
+                escribirFichero(pw, table.getPlatos());
+                s = 1;
+            } else {
+                fw = new FileWriter(archivo);
+                PrintWriter pw = new PrintWriter(fw);
+                ingresarFichero();
+                s = 1;
             }
-            
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
         } finally {
@@ -408,7 +415,7 @@ public  void ingresarFichero() {
             }
         }
 
-        VMesero v1 = new VMesero(Empleados, lab_willian_garcia_miguel_julio.Restaurante.LaPros,table);
+        VMesero v1 = new VMesero(Empleados, lab_willian_garcia_miguel_julio.Restaurante.LaPros, table);
         v1.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed

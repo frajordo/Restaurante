@@ -9,10 +9,9 @@ public class DCook extends javax.swing.JFrame {
     static Cocina cook;
     static Mesero Empleado;
     public static Mesa table;
-    public DCook(Cocina cook,Mesero Empleado) {
+    public DCook(Cocina cook) {
         initComponents();
         this.cook=cook;
-        this.Empleado=Empleado;
         System.out.println(cook.punteros.size());        
         for (int i = 0; i < cook.punteros.size(); i++) {
             //this.cook.punteros.get(i).imprimir(this.cook.punteros.get(i));
@@ -143,7 +142,7 @@ public class DCook extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DCook(cook,Empleado).setVisible(true);
+                new DCook(cook).setVisible(true);
             }
         });
     }
