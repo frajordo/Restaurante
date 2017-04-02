@@ -13,6 +13,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.util.StringTokenizer;//Descomponer lineas
 import javax.swing.table.DefaultTableModel;//jtable
+import lab_willian_garcia_miguel_julio.Models.Cocina;
 import lab_willian_garcia_miguel_julio.Models.Mesa;
 import lab_willian_garcia_miguel_julio.Models.Mesero;
 import lab_willian_garcia_miguel_julio.Models.Plato;//lista de platos
@@ -25,10 +26,12 @@ public class VMenu extends javax.swing.JFrame {
     public static Mesero Empleados;
     public static Mesa table;
     public static FileWriter fw = null;
+    public static Cocina kook;
 
     public VMenu(Mesero Empleados, Mesa table) {
         initComponents();
         setCombo();
+        setMenI();
         jLabel1.setText(jTable1.getModel().getValueAt(0, 0).toString());
         jLabel4.setText("$ " + jTable1.getModel().getValueAt(0, 1).toString());
         jButton1.setEnabled(false);
@@ -91,7 +94,7 @@ public  void ingresarFichero() {
     }
     
 
-    public void setCombo() {
+       public void setCombo() {
         try {
             //Se colocan las opciones en el combobox
             FileInputStream fstream = new FileInputStream("Archivos\\Menu\\Categorias.txt");
@@ -101,7 +104,7 @@ public  void ingresarFichero() {
             jComboBox1.addItem("TODAS");
             jComboBox1.setSelectedIndex(0);
             while ((strLine = br.readLine()) != null) {
-                jComboBox1.addItem(strLine.substring(0, strLine.length() - 1));
+                if(!strLine.equals(""))jComboBox1.addItem(strLine.substring(0, strLine.length() - 1));
             }
             in.close();
         } catch (Exception e) {
@@ -113,22 +116,22 @@ public  void ingresarFichero() {
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
         try {
             //eliminar columna  //((DefaultTableModel)myJTable.getModel()).removeRow(rowToRemove);
-
-            FileInputStream fstream = new FileInputStream("Archivos\\Menu\\Categorias.txt");//me ubico en en archivo
+            FileInputStream fstream = new FileInputStream("Archivos\\Menu\\Categorias.txt");
             DataInputStream in = new DataInputStream(fstream);
             BufferedReader br = new BufferedReader(new InputStreamReader(in));
             String strLine;
-            while ((strLine = br.readLine()) != null) {//me muevo entre lineas
-                //todas las categorias posible
-                llenar(strLine.substring(0, strLine.length() - 1), modelo);
+            while ((strLine = br.readLine()) != null) {
+                if(!strLine.equals("")){
+                    llenar(strLine.substring(0, strLine.length() - 1), modelo);
+                }
             }
-            in.close();//cierro el archivo
+            in.close();
         } catch (Exception e) {
             System.err.println("Error: " + e.getMessage());
         }
     }
 
-    public void llenar(String strLine, DefaultTableModel modelo) {
+     public void llenar(String strLine, DefaultTableModel modelo) {
         try {
             FileInputStream fss = new FileInputStream("Archivos\\Menu\\" + strLine + ".txt");
             DataInputStream in1 = new DataInputStream(fss);
@@ -319,7 +322,7 @@ public  void ingresarFichero() {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+       DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
         modelo.setRowCount(0);
         if (!jComboBox1.getSelectedItem().toString().equals("TODAS")) {
             llenar(jComboBox1.getSelectedItem().toString(), modelo);
@@ -342,8 +345,9 @@ public  void ingresarFichero() {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         /*obtenemos el plato con la cantidad y el precio y lo guardamos en las variables declaradas anteriormente*/
- /* aqui le agregamos al nodo la informacion*/
+        /* aqui le agregamos al nodo la informacion*/
         if (Integer.parseInt(jSpinner1.getValue().toString()) > 0) {
+            //kook.consultarFichero(jComboBox1.getSelectedItem().toString(),jLabel1.getText(),jSpinner1.getValue().toString());
             Plato p = new Plato(jLabel1.getText(), Integer.parseInt(jSpinner1.getValue().toString()), Float.parseFloat(jLabel4.getText().substring(2, jLabel4.getText().length())), 10);
 
             if (ptr == null) {

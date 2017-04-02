@@ -1,11 +1,20 @@
 package lab_willian_garcia_miguel_julio.Views;
 
+import com.itextpdf.text.BadElementException;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
 import java.awt.Component;
+import java.awt.Desktop;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -33,6 +42,7 @@ public class Esc_Mesa extends javax.swing.JFrame {
         setResizable(false);
         this.Empleado = Empleado;
         this.rest = rest;
+        this.table= table;
         jLabel3.setText(Empleado.getNombre());
         if (verificacion1()) {
             jPanel2.setEnabled(false);//jPanel2.setVisible(false);
@@ -365,7 +375,35 @@ public void mostrarFichero() {
         v1.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
+public void factura() throws FileNotFoundException, DocumentException, BadElementException, IOException {
+        
+       
+        Plato t = new Plato();
+        System.out.println(table.getPlatos().getName());
+        t=table.getPlatos();
+        int o = 0;
+         
+        FileOutputStream archivo = new FileOutputStream("mesa" + table.getId() + ".pdf");
+      
+        int suma = 0;
+        Document documento = new Document();
+        PdfWriter.getInstance(documento, archivo);
+        documento.open();
+        Image imagen = Image.getInstance("prosperidad.jpg");
+        documento.add(imagen);
 
+        while (t != null) {
+            o = (int) (t.getPrec() * t.getCant());
+            documento.add(new Paragraph(t.getName() + "-----------------------------------------" + t.getCant() + "--------------------" + o));
+            suma = suma + o;
+            t=t.getLink();
+        }
+        if (t == null) {
+            String p = Integer.toString(suma);
+            documento.add(new Paragraph("total:" + "-------------------------------------------------------------" + p));
+        }
+        documento.close();
+    }
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         /*try {
             actmesas();
@@ -374,6 +412,24 @@ public void mostrarFichero() {
         }
        */ 
         mostrarFichero();
+        try {
+            
+            factura();
+            
+        } catch (DocumentException ex) {
+            Logger.getLogger(VMenu.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(VMenu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+   
+            File objetofile = new File ("mesa"+table.getId()+".pdf");
+            Desktop.getDesktop().open(objetofile);
+
+     }catch (IOException ex) {
+
+            System.out.println(ex);
+     }
         VMesero v1 = new VMesero(Empleado, rest,table);
         rest.buscarMesa(Integer.parseInt(jComboBox3.getSelectedItem().toString())).setMesero("");
         rest.buscarMesa(Integer.parseInt(jComboBox3.getSelectedItem().toString())).setPlatos();
