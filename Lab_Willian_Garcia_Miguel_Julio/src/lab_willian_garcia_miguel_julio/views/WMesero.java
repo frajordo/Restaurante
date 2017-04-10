@@ -9,8 +9,10 @@ public class WMesero extends javax.swing.JFrame {
     /**
      * Creates new form WMeseros
      */
+    public static long cc=0;
     public WMesero() {
         initComponents();
+        jTextField1.setText("");
     }
 
     /**
@@ -91,6 +93,10 @@ public class WMesero extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public static long getCc() {
+        return cc;
+    }
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         RMesero v1=new RMesero(this);
         v1.setResizable(false);
@@ -107,7 +113,14 @@ public class WMesero extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Por favor solo numeros");
             return;
         }
-        LaPros.busCC(cc);
+        String msg=LaPros.busCC(cc);
+        JOptionPane.showMessageDialog(null,msg);
+        if(msg.equals("Acceso exitoso")){
+            this.cc=cc;
+            W2Mesero v2=new W2Mesero(this);
+            v2.setVisible(true);
+            this.setVisible(false);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

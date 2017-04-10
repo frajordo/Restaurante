@@ -4,51 +4,72 @@ import javax.swing.JOptionPane;
 
 public class Mesero {
 
-    private String Nombre;
-    private long cc;
+    private final String Nombre;
+    private final long cc;
     private int[] mesas = new int[5];
     private int nmesas = 0;
-    private Mesero link=null;
+    private Mesero link = null;
 
     public Mesero(String Nombre, long cc) {
         this.Nombre = Nombre;
         this.cc = cc;
     }
-     public void setLink(Mesero link) {
+
+    public void setLink(Mesero link) {
         this.link = link;
     }
-     
+
     public Mesero getLink() {
         return link;
     }
-    public void addMesero(String name,long cc){
+
+    public void addMesero(String name, long cc) {
         Mesero node = this;
-        while(node.getLink() != null){
-            if(node.getCc()==cc){
+        while (node.getLink() != null) {
+            if (node.getCc() == cc) {
                 JOptionPane.showMessageDialog(null, "El numero de CC ya se encuentra registrado");
                 return;
             }
             node = node.getLink();
         }
-        node.setLink(new Mesero(name,cc));
-        JOptionPane.showMessageDialog(null, "Nodo agregado despues de "+node.getNombre());
+        if (node.getCc() == cc) {
+            JOptionPane.showMessageDialog(null, "El numero de CC ya se encuentra registrado");
+            return;
+        }
+        node.setLink(new Mesero(name, cc));
+        JOptionPane.showMessageDialog(null, "Nodo agregado despues de " + node.getNombre());
     }
-    public boolean busM(long cc){
+
+    public boolean busC(long cc) {
         Mesero node = this;
-        while(node != null){
-            if(cc==node.getCc())return true;
+        while (node != null) {
+            if (cc == node.getCc()) {
+                return true;
+            }
             node = node.getLink();
         }
         return false;
     }
-    public void printMesero(){
+    
+    public Mesero busM(long cc) {
         Mesero node = this;
-        while(node != null){
-            System.out.print(node.getCc()+" "+node.getNombre()+"\n");
+        while (node != null) {
+            if (cc == node.getCc()) {
+                return node;
+            }
+            node = node.getLink();
+        }
+        return null;
+    }
+
+    public void printMesero() {
+        Mesero node = this;
+        while (node != null) {
+            System.out.print(node.getCc() + " " + node.getNombre() + "\n");
             node = node.getLink();
         }
     }
-     
+
     public void setM(int id) {
         if (nmesas < 5) {
             mesas[nmesas] = id;
