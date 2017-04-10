@@ -5,6 +5,7 @@
  */
 package lab_willian_garcia_miguel_julio.views;
 
+import java.awt.Component;
 import java.util.StringTokenizer;
 import static lab_willian_garcia_miguel_julio.controls.Lab_Willian_Garcia_Miguel_Julio.LaPros;
 import static lab_willian_garcia_miguel_julio.views.WMesero.cc;
@@ -19,29 +20,35 @@ public class W2Mesero extends javax.swing.JFrame {
      * Creates new form W2Mesero
      */
     public static WMesero anterior;
+    public static int mesa;
     public W2Mesero(WMesero anterior) {
         initComponents();
         this.anterior=anterior;
-        if (ver1()) jPanel4.setEnabled(false);
-        else mostrarAñadir();//No listo...
+        jLabel1.setText(LaPros.busM(cc).getNombre());
+        if (ver1()){
+            for (Component cp : jPanel4.getComponents()) 
+                cp.setEnabled(false);
+        } else mostrarAñadir();//No listo...
+        System.out.println("ok3");
         if (ver2()){ 
-            jPanel3.setEnabled(false);
-            jPanel2.setEnabled(false);
+            for (Component cp : jPanel2.getComponents()) 
+                cp.setEnabled(false);
+            for (Component cp : jPanel3.getComponents()) 
+                cp.setEnabled(false);
         }else mostrarTomar();//No listo...
-            
     }
     
-    private void mostrarTomar() {
-        StringTokenizer st = new StringTokenizer(LaPros.busM(cc).getMesas(), ",");
-        while (st.hasMoreTokens()) {
-            jComboBox2.addItem(st.nextToken());
-        }
-        jComboBox2.setSelectedIndex(0);
-
-    }
     private void mostrarAñadir() {
-            StringTokenizer st = new StringTokenizer(LaPros.busM(cc).getMesas(), ",");
-            System.out.print(LaPros.busM(cc).getMesas());
+        StringTokenizer st = new StringTokenizer(LaPros.getML(), ",");
+        System.out.println(LaPros.getML());
+        while (st.hasMoreTokens()) {
+            jComboBox1.addItem(st.nextToken());
+        }
+        jComboBox1.setSelectedIndex(0);
+    }
+    private void mostrarTomar() {
+            StringTokenizer st = new StringTokenizer(LaPros.getML(), ",");
+            System.out.print(LaPros.getML());
             while (st.hasMoreTokens()) {
                 String temp = st.nextToken();
                 jComboBox2.addItem(temp);
@@ -175,6 +182,11 @@ public class W2Mesero extends javax.swing.JFrame {
         });
 
         jButton1.setText("<html>Atender<br/>mesa</html>");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -226,11 +238,7 @@ public class W2Mesero extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(68, 68, 68)
-                                .addComponent(jLabel1))
-                            .addComponent(jButton4))
+                        .addComponent(jButton4)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
@@ -241,6 +249,10 @@ public class W2Mesero extends javax.swing.JFrame {
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(80, 80, 80))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -278,6 +290,15 @@ public class W2Mesero extends javax.swing.JFrame {
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        mesa=Integer.parseInt(jComboBox1.getSelectedItem().toString());
+        WMenu v1= new WMenu(this);
+        v1.setLocationRelativeTo(null);
+        v1.setResizable(false);
+        v1.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton1ActionPerformed
      
     /**
      * @param args the command line arguments

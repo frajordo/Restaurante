@@ -53,7 +53,8 @@ public class Plato {
         return link;
     }
 
-    public void imprimir(Plato link) {
+    public void imprimir() {
+        Plato link=this;
         if (link == null) {
             System.out.println("Lista Vacia");
         } else {

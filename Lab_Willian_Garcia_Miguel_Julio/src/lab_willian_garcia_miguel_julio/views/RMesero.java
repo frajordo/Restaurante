@@ -115,7 +115,6 @@ public class RMesero extends javax.swing.JFrame {
             }
             LaPros.addMesero(name, cc);
             LaPros.printemple();
-            System.out.println("ok");
             anterior.setVisible(true);
             this.dispose();
         }

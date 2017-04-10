@@ -118,6 +118,8 @@ public class WMesero extends javax.swing.JFrame {
         if(msg.equals("Acceso exitoso")){
             this.cc=cc;
             W2Mesero v2=new W2Mesero(this);
+            v2.setLocationRelativeTo(null);
+            v2.setResizable(false);
             v2.setVisible(true);
             this.setVisible(false);
         }

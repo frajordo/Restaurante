@@ -1,36 +1,104 @@
 package lab_willian_garcia_miguel_julio.models;
 
 public class Mesa {
-
-    long cc;
-    Plato platos;
-
+    private int id;
+    private  long cc;
+    private Plato platos;
+    private Mesa link;
+    public Mesa(int id) {
+        this.id=id;
+        cc=0;
+        platos=null;
+        link=null;
+    }
     public Mesa() {
-    this.cc=0;
-    this.platos=null;
+        this.id=0;
+        cc=0;
+        platos=null;
+        link=null;
     }
 
-    public Mesa(int cc) {
+    public Mesa(long cc) {
         this.cc = cc;
         platos = null;
+        link=null;
+    }
+    public void crearmesas(int m){
+        Mesa temp=this;
+        this.setId(1);
+        int i=1;
+        while (i<m) {
+            temp.setLink(new Mesa((i+1)));
+            temp=temp.getLink();
+            i++;
+        }
+    }
+
+    public Mesa getLink() {
+        return link;
+    }
+
+    public void setLink(Mesa link) {
+        this.link = link;
+    }
+    
+     public String getPlatos() {
+        Plato pi = new Plato();
+        pi = this.platos;
+        String msg="";
+        while (pi!= null) {
+            msg+=pi.getName()+",";
+            pi=pi.getLink();
+        }
+        if(!msg.equals(""))return msg.substring(0, msg.length()-1);
+        else return "";
     }
 
     public void setPlatos(Plato platos) {
         this.platos = platos;
     }
 
-    public void setPlatos() {
-        this.platos = null;
-    }
-
     public long getCc() {
         return cc;
     }
-
     public void setCc(long cc) {
         this.cc = cc;
     }
 
+    public int getId() {
+        return id;
+    }
+    
+    public void setId(int id) {
+        this.id = id;
+    }
+      public Mesa busMxid(int id) {
+        Mesa pi = new Mesa();
+        pi = this;
+        while (pi!= null) {
+            if(pi.getId()==id)return pi;
+        }
+        return null;
+    }
+     public String busML() {
+        Mesa pi = new Mesa();
+        pi = this;
+        String msg="";
+        while (pi!= null) {
+            if(pi.getCc()==0)msg+=pi.getId()+",";
+            pi=pi.getLink();
+        }
+        if(!msg.equals(""))return msg;
+        else return "";
+    }
+      public long busMxcc(long cc) {
+        Mesa pi = new Mesa(0);
+        pi = this;
+        while (pi!= null) {
+            if(pi.getCc()==id)return pi.getId();
+        }
+        return 0;
+    }
     public void añadirPlatos(Plato platos) {
         Plato pi = new Plato();
         pi = platos;
@@ -41,10 +109,7 @@ public class Mesa {
         this.platos = platos;
     }
 
-    public Plato getPlatos() {
-        return platos;
-    }
-
+   
 public String imprimirPM(Plato platos){
 String str="";
         if (platos== null) {
@@ -62,13 +127,4 @@ String str="";
         return str;
 
 }
-    /*
-    public void setPtr(Plato Ptr) {
-        this.Ptr = Ptr;
-    }*/
-
-    public long getcc() {
-        return cc;
-    }
-
 }

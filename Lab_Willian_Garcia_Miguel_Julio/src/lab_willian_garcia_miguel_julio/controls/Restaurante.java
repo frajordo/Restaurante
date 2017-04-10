@@ -1,8 +1,14 @@
 package lab_willian_garcia_miguel_julio.controls;
+import lab_willian_garcia_miguel_julio.models.Mesa;
 import lab_willian_garcia_miguel_julio.models.Mesero;
 
 public class Restaurante {
     public static Mesero empleados=null;    
+    public static Mesa mesas=new Mesa();
+    public Restaurante(int m) {
+        mesas.crearmesas(m);
+    }
+    
     public void addMesero(String name,long cc){
             if (empleados == null) {
                  empleados=new Mesero(name,cc);
@@ -10,7 +16,11 @@ public class Restaurante {
                 empleados.addMesero(name, cc);
             }
     }
-    
+    public String getML(){
+        String msg=mesas.busML();
+        if(!msg.equals(""))return msg.substring(0, msg.length()-1);
+        else return "";
+    }
     public void printemple(){
         if (empleados != null) {
             empleados.printMesero();
