@@ -5,6 +5,7 @@ public class Mesa {
     private  long cc;
     private Plato platos;
     private Mesa link;
+    
     public Mesa(int id) {
         this.id=id;
         cc=0;
@@ -42,7 +43,7 @@ public class Mesa {
         this.link = link;
     }
     
-     public String getPlatos() {
+     public String getmsgPlatos() {
         Plato pi = new Plato();
         pi = this.platos;
         String msg="";
@@ -52,6 +53,10 @@ public class Mesa {
         }
         if(!msg.equals(""))return msg.substring(0, msg.length()-1);
         else return "";
+    }
+
+    public Plato getPlatos() {
+        return platos;
     }
 
     public void setPlatos(Plato platos) {
@@ -72,7 +77,7 @@ public class Mesa {
     public void setId(int id) {
         this.id = id;
     }
-      public Mesa busMxid(int id) {
+    public Mesa busMxid(int id) {
         Mesa pi = new Mesa();
         pi = this;
         while (pi!= null) {
@@ -101,17 +106,17 @@ public class Mesa {
     }
     public void añadirPlatos(Plato platos) {
         Plato pi = new Plato();
-        pi = platos;
+        pi = this.platos;
         while (pi.getLink() != null) {
             pi = pi.getLink();
         }
-        pi.setLink(this.platos);
-        this.platos = platos;
+        pi.setLink(platos);
     }
 
    
-public String imprimirPM(Plato platos){
-String str="";
+public String imprimirPM(){
+    Plato platos=this.getPlatos();
+    String str="";
         if (platos== null) {
             return "Lista Vacia";
         } else {

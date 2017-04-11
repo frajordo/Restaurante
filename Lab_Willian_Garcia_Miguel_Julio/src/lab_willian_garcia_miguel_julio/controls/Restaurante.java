@@ -21,6 +21,11 @@ public class Restaurante {
         if(!msg.equals(""))return msg.substring(0, msg.length()-1);
         else return "";
     }
+
+    public  Mesa getMesas() {
+        return mesas;
+    }
+    
     public void printemple(){
         if (empleados != null) {
             empleados.printMesero();
@@ -42,7 +47,7 @@ public class Restaurante {
     }
     
     
-    public Mesero busM(long cc){
+     public Mesero busM(long cc){
             return empleados.busM(cc);
     }
     

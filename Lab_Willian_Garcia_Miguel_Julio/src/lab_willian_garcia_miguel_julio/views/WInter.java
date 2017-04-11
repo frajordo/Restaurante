@@ -5,17 +5,32 @@
  */
 package lab_willian_garcia_miguel_julio.views;
 
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
+import javax.swing.table.DefaultTableModel;
+import lab_willian_garcia_miguel_julio.models.Mesa;
+import lab_willian_garcia_miguel_julio.models.Plato;
+
 /**
  *
  * @author Administrador
  */
 public class WInter extends javax.swing.JFrame {
 
-    /**
-     * Creates new form WInter
-     */
+    public static Mesa mesas;
+    public static Plato platos;
+    
+    
     public WInter() {
         initComponents();
+       DefaultTableModel modelo =(DefaultTableModel) jTable1.getModel();
+              for (int i = 0; i < 10; i++) {
+            
+            
+        }
     }
 
     /**
@@ -27,17 +42,29 @@ public class WInter extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+            },
+            new String [] {
+                "Orden", "Mesa", "Tiempo restante"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 580, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE)
         );
 
         pack();
@@ -79,5 +106,7 @@ public class WInter extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }

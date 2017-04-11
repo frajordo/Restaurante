@@ -8,6 +8,7 @@ import java.util.StringTokenizer;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import static lab_willian_garcia_miguel_julio.controls.Lab_Willian_Garcia_Miguel_Julio.LaPros;
+import static lab_willian_garcia_miguel_julio.controls.Lab_Willian_Garcia_Miguel_Julio.v2;
 import lab_willian_garcia_miguel_julio.models.Mesa;
 import lab_willian_garcia_miguel_julio.models.Plato;
 import static lab_willian_garcia_miguel_julio.views.W2Mesero.mesa;
@@ -192,7 +193,21 @@ public class WMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        if(plato!=null){
+            Mesa table=new Mesa();
+            int numero=Integer.parseInt(jLabel2.getText().substring(jLabel2.getText().length()-1,jLabel2.getText().length()));
+            table=LaPros.getMesas().busMxid(numero);
+        if (table.getPlatos()== null){//orden de tomar mesa
+            table.setPlatos(plato);
+            table.setCc(cc);
+            LaPros.busM(cc).setM(numero);
+        } else {
+            table.añadirPlatos(plato);//orden de añadir   
+        }
+        System.out.println(table.imprimirPM());
+        plato=null;
+        //v2.setVisible(false);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
@@ -221,7 +236,7 @@ public class WMenu extends javax.swing.JFrame {
                 }
                 jLabel6.setText((Integer.parseInt(jLabel6.getText()) + 1) + "");
                 if (!jLabel6.getText().equals("0")) jButton1.setEnabled(true);
-                plato.imprimir();
+                //plato.imprimir();
             }else JOptionPane.showMessageDialog(this,"No ha seleccionado un plato");
         }else JOptionPane.showMessageDialog(this,"Erro cantidad negativa o cero");
   

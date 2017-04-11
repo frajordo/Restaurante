@@ -294,7 +294,7 @@ public class W2Mesero extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         mesa=Integer.parseInt(jComboBox1.getSelectedItem().toString());
         WMenu v1= new WMenu(this);
-        v1.setLocationRelativeTo(null);
+        v1.setLocation(this.getX()-v1.getWidth()+300, this.getY()+150);
         v1.setResizable(false);
         v1.setVisible(true);
         this.setVisible(false);
