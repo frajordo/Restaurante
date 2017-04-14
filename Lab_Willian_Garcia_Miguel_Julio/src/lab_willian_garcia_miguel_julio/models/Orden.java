@@ -3,13 +3,23 @@ package lab_willian_garcia_miguel_julio.models;
 public class Orden {
     int mesa;
     Plato pedido;
+    long mesero;
     Orden link;
-    public Orden(int mesa,Plato pedido) {
+    public Orden(int mesa,Plato pedido,long mesero) {
+        this.mesero=mesero;
         this.mesa=mesa;
         this.pedido=pedido;
         link=null;
     }
 
+    public long getMesero() {
+        return mesero;
+    }
+
+    public void setMesero(long mesero) {
+        this.mesero = mesero;
+    }
+    
     public int getMesa() {
         return mesa;
     }
@@ -34,8 +44,8 @@ public class Orden {
         this.link = link;
     }
     
-    public void addOrden(int mesa,Plato pedido) {
-        Orden temp=this,nueva=new Orden(mesa,pedido);
+    public void addOrden(int mesa,Plato pedido,long cc) {
+        Orden temp=this,nueva=new Orden(mesa,pedido,cc);
         while(temp.getLink()!=null){
             temp=temp.getLink();
         }

@@ -8,6 +8,7 @@ import java.util.StringTokenizer;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import static lab_willian_garcia_miguel_julio.controls.Lab_Willian_Garcia_Miguel_Julio.LaPros;
+import static lab_willian_garcia_miguel_julio.controls.Lab_Willian_Garcia_Miguel_Julio.updateWInter;
 import static lab_willian_garcia_miguel_julio.controls.Restaurante.ordenes;
 import lab_willian_garcia_miguel_julio.models.Mesa;
 import lab_willian_garcia_miguel_julio.models.Orden;
@@ -208,14 +209,15 @@ public class WMenu extends javax.swing.JFrame {
                     table.añadirPlatos(plato);//orden de añadir   
                 }
                 if(ordenes==null){
-                    ordenes=new Orden(numero,plato2);
+                    ordenes=new Orden(numero,plato2,cc);
                 }else{
-                    ordenes.addOrden(numero,plato2);
+                    ordenes.addOrden(numero,plato2,cc);
                 }
                 plato=null;
                 plato2=null;
-                System.out.println("ok");
-                //v2.setVisible(false);
+                System.out.println("in");
+                updateWInter();
+                System.out.println("out");
         }
         System.out.println("ORDENES HASTA EL MOMENTO");
         ordenes.mostar();

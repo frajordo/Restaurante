@@ -13,4 +13,7 @@ public class Lab_Willian_Garcia_Miguel_Julio {
         v2.setLocation(v1.getX()+v1.getWidth()+100, v1.getY());
         v2.setVisible(true);
     }
+    public static void updateWInter(){
+        v2.update();
+    }
 }

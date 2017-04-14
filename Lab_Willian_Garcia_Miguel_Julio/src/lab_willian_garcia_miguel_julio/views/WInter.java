@@ -11,7 +11,9 @@ import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 import javax.swing.table.DefaultTableModel;
+import static lab_willian_garcia_miguel_julio.controls.Restaurante.ordenes;
 import lab_willian_garcia_miguel_julio.models.Mesa;
+import lab_willian_garcia_miguel_julio.models.Orden;
 import lab_willian_garcia_miguel_julio.models.Plato;
 
 /**
@@ -22,13 +24,10 @@ public class WInter extends javax.swing.JFrame {
 
     public static Mesa mesas;
     public static Plato platos;
-    
-    
+    public static Orden temp=null;
     public WInter() {
         initComponents();
-       DefaultTableModel modelo =(DefaultTableModel) jTable1.getModel();
-              for (int i = 0; i < 10; i++) {   
-        }
+        update();
     }
 
     /**
@@ -49,7 +48,7 @@ public class WInter extends javax.swing.JFrame {
             new Object [][] {
             },
             new String [] {
-                "Orden", "Mesa", "Tiempo restante"
+                "N° Orden", "Mesa", "Plato","Mesero"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -73,6 +72,24 @@ public class WInter extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
+    public void update(){
+        DefaultTableModel modelo =(DefaultTableModel) jTable1.getModel();
+            temp=ordenes;
+            int i=1;
+            System.out.println(":|");
+             while(temp!=null){
+                 Plato temp2=null;
+                 temp2=temp.getPedido();
+                 System.out.println(":)");
+                 while(temp2!=null){
+                    modelo.addRow(new Object[]{i, temp.getMesa(), temp2.getName(),temp.getMesero()});
+                    temp2=temp2.getLink();
+                     System.out.println(":(");
+                 }
+                 i++;
+                 temp=temp.getLink();
+             }
+    }
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
