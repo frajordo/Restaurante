@@ -37,7 +37,7 @@ public class Mesero {
             return;
         }
         node.setLink(new Mesero(name, cc));
-        JOptionPane.showMessageDialog(null, "Nodo agregado despues de " + node.getNombre());
+        JOptionPane.showMessageDialog(null, "Registro Exitoso");
     }
 
     public boolean busC(long cc) {

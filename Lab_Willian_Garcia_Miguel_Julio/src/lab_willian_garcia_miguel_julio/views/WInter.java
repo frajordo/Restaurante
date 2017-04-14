@@ -27,9 +27,7 @@ public class WInter extends javax.swing.JFrame {
     public WInter() {
         initComponents();
        DefaultTableModel modelo =(DefaultTableModel) jTable1.getModel();
-              for (int i = 0; i < 10; i++) {
-            
-            
+              for (int i = 0; i < 10; i++) {   
         }
     }
 
@@ -60,7 +58,9 @@ public class WInter extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 580, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 128, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

@@ -8,15 +8,16 @@ import java.util.StringTokenizer;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import static lab_willian_garcia_miguel_julio.controls.Lab_Willian_Garcia_Miguel_Julio.LaPros;
-import static lab_willian_garcia_miguel_julio.controls.Lab_Willian_Garcia_Miguel_Julio.v2;
+import static lab_willian_garcia_miguel_julio.controls.Restaurante.ordenes;
 import lab_willian_garcia_miguel_julio.models.Mesa;
+import lab_willian_garcia_miguel_julio.models.Orden;
 import lab_willian_garcia_miguel_julio.models.Plato;
 import static lab_willian_garcia_miguel_julio.views.W2Mesero.mesa;
 import static lab_willian_garcia_miguel_julio.views.WMesero.cc;
 
 public class WMenu extends javax.swing.JFrame {
     public static W2Mesero anterior;
-    public static Plato plato=null;
+    public static Plato plato=null,plato2=null;
     public WMenu(W2Mesero anterior) {
         initComponents();
         this.anterior=anterior;
@@ -190,6 +191,8 @@ public class WMenu extends javax.swing.JFrame {
         } else {
             setMenI();
         }
+        jTable1.getTableHeader().setReorderingAllowed(false);
+        jTable1.getTableHeader().setResizingAllowed(false);
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -197,17 +200,25 @@ public class WMenu extends javax.swing.JFrame {
             Mesa table=new Mesa();
             int numero=Integer.parseInt(jLabel2.getText().substring(jLabel2.getText().length()-1,jLabel2.getText().length()));
             table=LaPros.getMesas().busMxid(numero);
-        if (table.getPlatos()== null){//orden de tomar mesa
-            table.setPlatos(plato);
-            table.setCc(cc);
-            LaPros.busM(cc).setM(numero);
-        } else {
-            table.añadirPlatos(plato);//orden de añadir   
+                if (table.getPlatos()== null){//orden de tomar mesa
+                    table.setPlatos(plato);
+                    table.setCc(cc);
+                    LaPros.busM(cc).setM(numero);
+                } else {
+                    table.añadirPlatos(plato);//orden de añadir   
+                }
+                if(ordenes==null){
+                    ordenes=new Orden(numero,plato2);
+                }else{
+                    ordenes.addOrden(numero,plato2);
+                }
+                plato=null;
+                plato2=null;
+                System.out.println("ok");
+                //v2.setVisible(false);
         }
-        System.out.println(table.imprimirPM());
-        plato=null;
-        //v2.setVisible(false);
-        }
+        System.out.println("ORDENES HASTA EL MOMENTO");
+        ordenes.mostar();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
@@ -224,13 +235,18 @@ public class WMenu extends javax.swing.JFrame {
             jButton1.setEnabled(true);
         }*/
         if (Integer.parseInt(jSpinner1.getValue().toString()) > 0) {
-            //Se consulta si se puede agregar con el jefe de cocina Proximamente
+            //Se consulta si se puede agregar con el jefe de cocina (Proximamente)
             String msg;
             if(jTable1.getSelectedRow()!=-1) {
                 /*obtenemos el plato con la cantidad y el precio y lo guardamos en las variables declaradas anteriormente*/
                 Plato p = new Plato(jLabel3.getText(), Integer.parseInt(jSpinner1.getValue().toString()), Float.parseFloat(jLabel4.getText().substring(2, jLabel4.getText().length())), 10);
-                if (plato == null)  plato = p;
-                else {
+                Plato p1 = new Plato(jLabel3.getText(), Integer.parseInt(jSpinner1.getValue().toString()), Float.parseFloat(jLabel4.getText().substring(2, jLabel4.getText().length())), 10);
+                if (plato == null){
+                    plato = p;
+                    plato2=p1;
+                }else {
+                    p1.setLink(plato2);
+                    plato2=p1;
                     p.setLink(plato);
                     plato = p;
                 }
@@ -319,6 +335,8 @@ public class WMenu extends javax.swing.JFrame {
         } catch (Exception e) {
             System.err.println("Error: " + e.getMessage());
         }
+        jTable1.getTableHeader().setReorderingAllowed(false);
+        jTable1.getTableHeader().setResizingAllowed(false);
     }
 
     public void llenar(String strLine, DefaultTableModel modelo) {

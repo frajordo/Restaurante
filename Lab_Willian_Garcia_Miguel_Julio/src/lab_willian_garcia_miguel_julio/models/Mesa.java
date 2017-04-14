@@ -82,6 +82,7 @@ public class Mesa {
         pi = this;
         while (pi!= null) {
             if(pi.getId()==id)return pi;
+            else pi=pi.getLink();
         }
         return null;
     }

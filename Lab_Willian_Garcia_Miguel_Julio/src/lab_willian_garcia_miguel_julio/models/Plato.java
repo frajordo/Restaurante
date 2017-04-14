@@ -5,7 +5,7 @@
  */
 package lab_willian_garcia_miguel_julio.models;
 
-public class Plato {
+public class Plato implements Cloneable {
     
     private String name;
     private int cant;
@@ -33,6 +33,22 @@ public class Plato {
         this.link = link;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setCant(int cant) {
+        this.cant = cant;
+    }
+
+    public void setPrec(float prec) {
+        this.prec = prec;
+    }
+
+    public void setTime(float time) {
+        this.time = time;
+    }
+    
     public String getName() {
         return name;
     }
@@ -61,7 +77,7 @@ public class Plato {
             Plato temp = new Plato();
             temp = link;
             while (temp != null) {
-                System.out.println(temp.getName()+" "+temp.getCant());
+                System.out.println(temp.getName()+" "+temp.getCant()+" "+temp.getLink());
                 temp=temp.getLink();
             }
         }
@@ -80,4 +96,27 @@ public class Plato {
         }
         return str;
     }
+     @Override
+     public Plato clone(){
+        Plato copia=new Plato(),tempO,tempC;
+        copia.setName(this.getName());
+        copia.setCant(this.getCant());
+        copia.setPrec(this.getPrec());
+        copia.setTime(this.getTime());
+        copia.setLink(this.getLink());
+        tempO=this.getLink();
+        tempC=copia;
+        while(tempO!=null){
+            Plato copia1=new Plato();
+            copia1.setName(tempO.getName());
+            copia1.setCant(tempO.getCant());
+            copia1.setPrec(tempO.getPrec());
+            copia1.setTime(tempO.getTime());
+            copia1.setLink(tempO.getLink());
+            tempC.setLink(copia1);
+            tempO=tempO.getLink();
+        }
+        return copia;
+     
+     }
 }
