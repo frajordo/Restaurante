@@ -41,6 +41,9 @@ public class Restaurante {
                 return "Acceso denegado\nNo hay meseros registrados";
             }
     }
+    public Mesa busMes(int id){
+            return this.getMesas().busMxid(id);
+      }
     public Mesero busM(long cc){
             return empleados.busM(cc);
     }

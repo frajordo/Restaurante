@@ -18,7 +18,7 @@ public class Mesa {
         platos=null;
         link=null;
     }
-
+    
     public Mesa(long cc) {
         this.cc = cc;
         platos = null;
@@ -76,7 +76,7 @@ public class Mesa {
     
     public void setId(int id) {
         this.id = id;
-    }
+    }   
     public Mesa busMxid(int id) {
         Mesa pi = new Mesa();
         pi = this;

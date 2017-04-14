@@ -72,6 +72,9 @@ public class Mesero {
 
     public void setM(int id) {
         if (nmesas < 5) {
+            for (int i = 0; i < nmesas; i++) {
+                if(mesas[i]==id)return;
+            }
             mesas[nmesas] = id;
             nmesas++;
         }

@@ -21,34 +21,42 @@ public class W2Mesero extends javax.swing.JFrame {
      */
     public static WMesero anterior;
     public static int mesa;
+    public static boolean v;
     public W2Mesero(WMesero anterior) {
         initComponents();
         this.anterior=anterior;
+        update();
+    }
+  
+    public void update(){
         jLabel1.setText(LaPros.busM(cc).getNombre());
         if (ver1()){
             for (Component cp : jPanel4.getComponents()) 
                 cp.setEnabled(false);
-        } else mostrarAñadir();//No listo...
-        System.out.println("ok3");
-        if (ver2()){ 
-            for (Component cp : jPanel2.getComponents()) 
-                cp.setEnabled(false);
-            for (Component cp : jPanel3.getComponents()) 
-                cp.setEnabled(false);
-        }else mostrarTomar();//No listo...
+        } else mostrarAñadir();
+        if (ver2()){
+            for (Component cp : jPanel2.getComponents())  cp.setEnabled(false);
+            for (Component cp : jPanel3.getComponents())  cp.setEnabled(false);
+        }else {
+            for (Component cp : jPanel2.getComponents())  cp.setEnabled(true);
+            for (Component cp : jPanel3.getComponents())  cp.setEnabled(true);
+            mostrarTomar();
+        }
+    
     }
     
     private void mostrarAñadir() {
         StringTokenizer st = new StringTokenizer(LaPros.getML(), ",");
-        System.out.println(LaPros.getML());
+        jComboBox1.removeAllItems();
         while (st.hasMoreTokens()) {
             jComboBox1.addItem(st.nextToken());
         }
         jComboBox1.setSelectedIndex(0);
     }
     private void mostrarTomar() {
-            StringTokenizer st = new StringTokenizer(LaPros.getML(), ",");
-            System.out.print(LaPros.getML());
+            StringTokenizer st = new StringTokenizer(LaPros.busM(cc).getMesas(), ",");
+            jComboBox2.removeAllItems();
+            jComboBox3.removeAllItems();
             while (st.hasMoreTokens()) {
                 String temp = st.nextToken();
                 jComboBox2.addItem(temp);
@@ -139,6 +147,11 @@ public class W2Mesero extends javax.swing.JFrame {
         jLabel5.setText("Id mesa");
 
         jButton2.setText("<html>Modificar<br/>pedido</html>");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -299,6 +312,15 @@ public class W2Mesero extends javax.swing.JFrame {
         v1.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        mesa=Integer.parseInt(jComboBox2.getSelectedItem().toString());
+        WMenu v1= new WMenu(this);
+        v1.setLocation(this.getX()-v1.getWidth()+300, this.getY()+150);
+        v1.setResizable(false);
+        v1.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton2ActionPerformed
      
     /**
      * @param args the command line arguments

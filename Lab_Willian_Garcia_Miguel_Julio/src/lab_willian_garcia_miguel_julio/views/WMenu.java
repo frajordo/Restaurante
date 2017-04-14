@@ -199,28 +199,32 @@ public class WMenu extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if(plato!=null){
             Mesa table=new Mesa();
-            int numero=Integer.parseInt(jLabel2.getText().substring(jLabel2.getText().length()-1,jLabel2.getText().length()));
+            int numero=Integer.parseInt(jLabel2.getText().substring(5,jLabel2.getText().length()));
             table=LaPros.getMesas().busMxid(numero);
+            table.setCc(cc);
+                /*
                 if (table.getPlatos()== null){//orden de tomar mesa
                     table.setPlatos(plato);
                     table.setCc(cc);
                     LaPros.busM(cc).setM(numero);
                 } else {
                     table.añadirPlatos(plato);//orden de añadir   
-                }
+                }*/
                 if(ordenes==null){
-                    ordenes=new Orden(numero,plato2,cc);
+                    System.out.println("lleno");
+                    LaPros.busM(cc).setM(numero);//asigno mesa al mesero
+                    ordenes=new Orden(numero,plato2,cc);//creo ordenes
                 }else{
+                    if(ordenes.busO(numero)) LaPros.busM(cc).setM(numero);////asigno mesa al mesero si no en
                     ordenes.addOrden(numero,plato2,cc);
                 }
-                plato=null;
+                //plato=null;
                 plato2=null;
-                System.out.println("in");
                 updateWInter();
-                System.out.println("out");
+                anterior.update();
+                anterior.setVisible(true);
+                this.dispose();
         }
-        System.out.println("ORDENES HASTA EL MOMENTO");
-        ordenes.mostar();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
@@ -261,6 +265,7 @@ public class WMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        anterior.update();
         anterior.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed

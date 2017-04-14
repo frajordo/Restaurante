@@ -98,25 +98,12 @@ public class Plato implements Cloneable {
     }
      @Override
      public Plato clone(){
-        Plato copia=new Plato(),tempO,tempC;
+        Plato copia=new Plato();
         copia.setName(this.getName());
         copia.setCant(this.getCant());
         copia.setPrec(this.getPrec());
         copia.setTime(this.getTime());
         copia.setLink(this.getLink());
-        tempO=this.getLink();
-        tempC=copia;
-        while(tempO!=null){
-            Plato copia1=new Plato();
-            copia1.setName(tempO.getName());
-            copia1.setCant(tempO.getCant());
-            copia1.setPrec(tempO.getPrec());
-            copia1.setTime(tempO.getTime());
-            copia1.setLink(tempO.getLink());
-            tempC.setLink(copia1);
-            tempO=tempO.getLink();
-        }
         return copia;
-     
      }
 }

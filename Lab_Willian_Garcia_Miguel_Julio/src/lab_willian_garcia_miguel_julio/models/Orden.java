@@ -15,7 +15,22 @@ public class Orden {
     public long getMesero() {
         return mesero;
     }
-
+    public boolean busO(int m) {
+        Orden temp=this;
+        while(temp!=null){
+            if(temp.getMesa()==m)return true;
+            temp=temp.getLink();
+        }
+        return false;
+    }
+     public Plato busOrden(int m) {
+        Orden temp=this;
+        while(temp!=null){
+            if(temp.getMesa()==m)return temp.getPedido();
+            temp=temp.getLink();
+        }
+        return null;
+    }
     public void setMesero(long mesero) {
         this.mesero = mesero;
     }

@@ -3,7 +3,7 @@ import lab_willian_garcia_miguel_julio.views.WInter;
 import lab_willian_garcia_miguel_julio.views.WMesero;
 
 public class Lab_Willian_Garcia_Miguel_Julio {
-    public static Restaurante LaPros= new Restaurante(20);
+public static Restaurante LaPros= new Restaurante(20);
     public static WInter v2=new WInter();
     public static void main(String[] args) {
         WMesero v1 =new WMesero();
