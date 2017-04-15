@@ -204,14 +204,6 @@ public class WMenu extends javax.swing.JFrame {
             int numero=Integer.parseInt(jLabel2.getText().substring(5,jLabel2.getText().length()));
             table=LaPros.getMesas().busMxid(numero);
             table.setCc(cc);
-                /*
-                if (table.getPlatos()== null){//orden de tomar mesa
-                    table.setPlatos(plato);
-                    table.setCc(cc);
-                    LaPros.busM(cc).setM(numero);
-                } else {
-                    table.añadirPlatos(plato);//orden de añadir   
-                }*/
                 if(ordenes==null){
                     LaPros.busM(cc).setM(numero);//asigno mesa al mesero
                     ordenes=new Orden(numero,plato2,cc);//creo ordenes
@@ -235,9 +227,8 @@ public class WMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+    DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
         if (Integer.parseInt(jSpinner1.getValue().toString()) > 0) {
-            
             //Se consulta si se puede agregar con el jefe de cocina (Proximamente)
             String msg;
             if(jTable1.getSelectedRow()!=-1) {
@@ -260,11 +251,9 @@ public class WMenu extends javax.swing.JFrame {
                     plato = p;
                 }
                 jLabel6.setText((Integer.parseInt(jLabel6.getText()) + 1) + "");
-                if (!jLabel6.getText().equals("0")) jButton1.setEnabled(true);
-                }else{
-                    JOptionPane.showMessageDialog(this,"No existen cantidades nesesarias en bodega");
-                }
-            }else JOptionPane.showMessageDialog(this,"No ha seleccionado un plato");
+                if (!jLabel6.getText().equals("0")) jButton1.setEnabled(true)
+              }else  JOptionPane.showMessageDialog(this,"No existen cantidades nesesarias en bodega");
+          }else JOptionPane.showMessageDialog(this,"No ha seleccionado un plato");
         }else JOptionPane.showMessageDialog(this,"Erro cantidad negativa o cero");
   
     }//GEN-LAST:event_jButton3ActionPerformed

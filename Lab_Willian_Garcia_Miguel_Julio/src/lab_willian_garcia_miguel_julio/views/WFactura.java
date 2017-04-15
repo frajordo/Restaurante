@@ -48,17 +48,20 @@ public class WFactura extends javax.swing.JFrame {
         linea = br.readLine();
         FileWriter fw = new FileWriter("Archivos\\Facturas\\FacturaP" + mesa + ".txt", true);
         PrintWriter pw = new PrintWriter(fw);
+        float total=0;
         while (linea != null) {
-            if(!linea.equals(""))pw.print(linea+"\n");
+            if(!linea.equals(""))pw.println(linea);
             StringTokenizer st = new StringTokenizer(linea, ";");
             while (st.hasMoreTokens()) {
                 String pd = st.nextToken(), c = st.nextToken(), pr = st.nextToken();
                 double subtotal = Double.parseDouble(c) * Double.parseDouble(pr);
+                total+=subtotal;
                 modelo.addRow(new Object[]{pd, c, pr, subtotal});
                 st.nextToken();
             }
             linea = br.readLine();
         }
+        modelo.addRow(new Object[]{"", "","Total", total});
         pw.close();
         fw = new FileWriter("Archivos\\Facturas\\Factura" + mesa + ".txt", false);
         pw = new PrintWriter(fw);
@@ -69,9 +72,7 @@ public class WFactura extends javax.swing.JFrame {
         temp.setPlatos(null);
         if (ordenes == null) {
             LaPros.busM(cc).delM(mesa);
-            System.out.println("Purga :"+LaPros.busM(cc).getNmesas());
             temp.setCc(0);
-            System.out.println("1");
         } else {
             if (!ordenes.busO(mesa)) {
                 LaPros.busM(cc).delM(mesa);
