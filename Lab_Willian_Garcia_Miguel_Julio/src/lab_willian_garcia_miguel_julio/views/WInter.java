@@ -140,12 +140,16 @@ if(ordenes!=null){
             
     public static void escribirFichero(PrintWriter pw,String msg) throws Exception {
         Scanner teclado = new Scanner(System.in);
+        if(!msg.equals("")){
         pw.print(msg);
         pw.println();
+        }
     }
 
     public static void ingresarFichero(int mesa) {
         FileWriter fw = null;
+//fw =new FileWriter("Archivos\\Facturas\\Factura"+mesa+".txt", false);
+
         try {
             fw =new FileWriter("Archivos\\Facturas\\Factura"+mesa+".txt", false);
             PrintWriter pw = new PrintWriter(fw);

@@ -9,7 +9,7 @@ public class Mesero {
     private int[] mesas = new int[5];
     private int nmesas = 0;
     private Mesero link = null;
-
+    private int mgestionadas=0;
     public Mesero(String Nombre, long cc) {
         this.Nombre = Nombre;
         this.cc = cc;
@@ -80,6 +80,17 @@ public class Mesero {
         }
     }
 
+    public int getMgestionadas() {
+        return mgestionadas;
+    }
+    public Mesero mejorgestor(){
+        Mesero node = this,mejor=this;
+        while (node != null) {
+            if(mejor.getMgestionadas()<node.getMgestionadas()) mejor=node;
+            node = node.getLink();
+        }
+        return mejor;
+    }
     public void delM(int id) {
         int i = 0;
         boolean x = true;
@@ -90,6 +101,7 @@ public class Mesero {
                     mesas[j] = mesas[j + 1];
                 }
                 nmesas--;
+                mgestionadas++;
             }
             i++;
         }

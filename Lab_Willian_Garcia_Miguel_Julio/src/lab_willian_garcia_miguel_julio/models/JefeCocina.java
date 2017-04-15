@@ -36,55 +36,37 @@ int uu=0;
             br = new BufferedReader(fr);
             fr2 = new FileReader(archivo2);
             br2 = new BufferedReader(fr2);
-            
-// Lectura del fichero linea a linea
+        // Lectura del fichero linea a linea
             String linea;
             boolean encontrado = false;
             String lineaEncontrada = null;
-            
-            while ((linea = br.readLine()) != null && !encontrado) {
-               
-// buscar la cadena palabra en la linea leida
-System.out.println("fgsfgsdfgf");
+            while ((linea = br.readLine()) != null && !encontrado) {// buscar la cadena palabra en la linea leida
                 if (linea.contains(lineaBuscar)) {
                     encontrado = true;
                     lineaEncontrada = linea;
                     StringTokenizer st = new StringTokenizer(lineaEncontrada, ";");
                     String g = st.nextToken();
-                    
                     StringTokenizer st2 = new StringTokenizer(g, ",");
-                   
                     int i = 0;
                     String temp;
                     String temp2;
-                   
                     while (i<st2.countTokens()) {
-                        
                         temp = st2.nextToken();
-                        System.out.println(temp);
                         if (i % 2 != 0) {
-                          
-                           
                             temp2 = st2.nextToken();
-                          
                             boolean encontrado2 = false;
                             String lineaEncontrada2 = null;
-                            
-String linea2;
+                            String linea2;
                                while ((linea2 = br2.readLine()) != null) {
 // buscar la cadena palabra en la linea leida
                                 yy=yy+1;
                                 if (linea2.contains(temp2)) {
-                                    
                                     lineaEncontrada2 = linea2;
                                     StringTokenizer st3 = new StringTokenizer(lineaEncontrada2, ";");
                                     st3.nextToken();
                                     String h = st3.nextToken();
-                                    
                                     int V = Integer.parseInt(h);
                                     int w = Integer.parseInt(temp);
-                                    System.out.println(V);
-                                    System.out.println(w);
                                     if (V > w) {
                                         uu=uu+1;
                                       
@@ -98,11 +80,6 @@ String linea2;
 
                         i++;
                     }
-                    
-
-                }else{
-                
-                    System.out.println("no existe");
                 }
             }
             

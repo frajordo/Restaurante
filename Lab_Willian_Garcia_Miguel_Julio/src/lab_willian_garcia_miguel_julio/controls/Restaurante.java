@@ -18,11 +18,11 @@ public class Restaurante {
         return numerom;
     }
 
-    public static Mesero getEmpleados() {
+    public  Mesero getEmpleados() {
         return empleados;
     }
 
-    public static Orden getOrden() {
+    public  Orden getOrden() {
         return ordenes;
     }
      

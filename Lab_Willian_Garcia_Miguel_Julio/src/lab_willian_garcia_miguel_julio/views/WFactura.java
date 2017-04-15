@@ -44,9 +44,8 @@ public class WFactura extends javax.swing.JFrame {
     public void facturar(int mesa) throws Exception {
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
         BufferedReader br = new BufferedReader(new FileReader("Archivos\\Facturas\\Factura" + mesa + ".txt"));
-        String linea;
-        linea = br.readLine();
-        FileWriter fw = new FileWriter("Archivos\\Facturas\\FacturaP" + mesa + ".txt", true);
+        String linea= br.readLine();
+        FileWriter fw = new FileWriter("Archivos\\Mesas\\mesa" + mesa + ".txt", true);
         PrintWriter pw = new PrintWriter(fw);
         float total=0;
         while (linea != null) {
@@ -56,6 +55,24 @@ public class WFactura extends javax.swing.JFrame {
                 String pd = st.nextToken(), c = st.nextToken(), pr = st.nextToken();
                 double subtotal = Double.parseDouble(c) * Double.parseDouble(pr);
                 total+=subtotal;
+                //consolidado cat.
+                BufferedReader br1 = new BufferedReader(new FileReader("Archivos\\Consolidados\\Categorias.txt"));
+                String temp=br1.readLine();
+                FileWriter fw1 = new FileWriter("Archivos\\Consolidados\\Categorias.txt", true);
+                PrintWriter pw1 = new PrintWriter(fw);
+                boolean a=true;
+                while(temp!=null && a){
+                    StringTokenizer st2= new StringTokenizer(temp,";");
+                    if(st2.nextToken().equals(pd)){
+                        a=false;
+                    }
+                }
+                if(a)pw1.println(c);
+                
+                //consolidado platos
+                fw1 = new FileWriter("Archivos\\Mesas\\mesa" + mesa + ".txt", true);
+                pw1 = new PrintWriter(fw);
+                
                 modelo.addRow(new Object[]{pd, c, pr, subtotal});
                 st.nextToken();
             }
