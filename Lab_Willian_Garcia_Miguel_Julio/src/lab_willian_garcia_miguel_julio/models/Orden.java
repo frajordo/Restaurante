@@ -15,7 +15,7 @@ public class Orden {
     public long getMesero() {
         return mesero;
     }
-    public boolean busO(int m) {
+    public boolean busO(int m) {//mesa m esta en las ordenes true sino false
         Orden temp=this;
         while(temp!=null){
             if(temp.getMesa()==m)return true;

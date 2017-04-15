@@ -31,24 +31,24 @@ public class Mesa {
     public void crearmesas(int m){
         Mesa temp=this;
         this.setId(1);
-        crearA(1);
+        crearA(1,true);
+        crearA(1,false);
         int i=1;
         while (i<m) {
             temp.setLink(new Mesa((i+1)));
-            crearA(i+1);
+            crearA(i+1,true);
+            crearA(i+1,false);
             temp=temp.getLink();
             i++;
         }
     }
-    public void crearA(int i){
+    public void crearA(int i,boolean c){
             FileWriter fw = null;
             try {
-                
-            File archivo = new File("Archivos\\Facturas\\Factura"+i+".txt");
+            File archivo = (c)?new File("Archivos\\Facturas\\Factura"+i+".txt"):new File("Archivos\\Facturas\\FacturaP"+i+".txt");
             fw = new FileWriter(archivo, false);
             PrintWriter pw = new PrintWriter(fw);
             escribirFichero(pw,"");
-            System.out.println(i);
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             } finally {

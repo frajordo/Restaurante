@@ -14,52 +14,72 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 import static lab_willian_garcia_miguel_julio.controls.Lab_Willian_Garcia_Miguel_Julio.LaPros;
+import static lab_willian_garcia_miguel_julio.controls.Restaurante.ordenes;
+import lab_willian_garcia_miguel_julio.models.Mesa;
+import static lab_willian_garcia_miguel_julio.views.WMesero.cc;
 
 /**
  *
  * @author Administrador
  */
-
 public class WFactura extends javax.swing.JFrame {
 
     /**
      * Creates new form WFactura
      */
     public static int mesa;
-     public static W2Mesero anterior;
-    public WFactura(W2Mesero anterior,int mesa) {
+    public static W2Mesero anterior;
+
+    public WFactura(W2Mesero anterior, int mesa) {
         initComponents();
-        this.mesa=mesa;
-        this.anterior=anterior;
+        this.mesa = mesa;
+        this.anterior = anterior;
         try {
-            facturar(mesa) ;
+            facturar(mesa);
         } catch (Exception ex) {
             Logger.getLogger(WFactura.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     public void facturar(int mesa) throws Exception {
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
-            BufferedReader br=new BufferedReader(new FileReader("Archivos\\Facturas\\Factura"+mesa+".txt"));
+        BufferedReader br = new BufferedReader(new FileReader("Archivos\\Facturas\\Factura" + mesa + ".txt"));
         String linea;
         linea = br.readLine();
+        FileWriter fw = new FileWriter("Archivos\\Facturas\\FacturaP" + mesa + ".txt", true);
+        PrintWriter pw = new PrintWriter(fw);
         while (linea != null) {
-            System.out.println(linea);
-            StringTokenizer st=new StringTokenizer(linea,";");
-                    while(st.hasMoreTokens()){
-                        String pd=st.nextToken(),c=st.nextToken(),pr=st.nextToken();
-                        double subtotal=Double.parseDouble(c)*Double.parseDouble(pr);
-                    modelo.addRow(new Object[]{pd,c,pr,subtotal});
-                    st.nextToken();
-                    }
+            if(!linea.equals(""))pw.print(linea+"\n");
+            StringTokenizer st = new StringTokenizer(linea, ";");
+            while (st.hasMoreTokens()) {
+                String pd = st.nextToken(), c = st.nextToken(), pr = st.nextToken();
+                double subtotal = Double.parseDouble(c) * Double.parseDouble(pr);
+                modelo.addRow(new Object[]{pd, c, pr, subtotal});
+                st.nextToken();
+            }
             linea = br.readLine();
         }
-        FileWriter fw = new FileWriter("Archivos\\Facturas\\Factura"+mesa+".txt", false);
-        PrintWriter pw = new PrintWriter(fw);
+        pw.close();
+        fw = new FileWriter("Archivos\\Facturas\\Factura" + mesa + ".txt", false);
+        pw = new PrintWriter(fw);
         pw.print("");
         pw.close();
         br.close();
-        LaPros.busMes(mesa).setPlatos(null);
+        Mesa temp = LaPros.busMes(mesa);
+        temp.setPlatos(null);
+        if (ordenes == null) {
+            LaPros.busM(cc).delM(mesa);
+            System.out.println("Purga :"+LaPros.busM(cc).getNmesas());
+            temp.setCc(0);
+            System.out.println("1");
+        } else {
+            if (!ordenes.busO(mesa)) {
+                LaPros.busM(cc).delM(mesa);
+                temp.setCc(0);
+            }
+        }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -127,6 +147,7 @@ public class WFactura extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        anterior.update();
         anterior.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -161,7 +182,7 @@ public class WFactura extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new WFactura(anterior,mesa).setVisible(true);
+                new WFactura(anterior, mesa).setVisible(true);
             }
         });
     }

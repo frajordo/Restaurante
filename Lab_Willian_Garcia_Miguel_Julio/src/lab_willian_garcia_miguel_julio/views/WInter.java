@@ -116,9 +116,9 @@ public class WInter extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
+if(ordenes!=null){
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
-        int n = 0;
+            int n = 0;
             Orden temp = ordenes;
             int i = 0,mesa=Integer.parseInt(modelo.getValueAt(0, 1).toString());
             while (i != n) {
@@ -134,6 +134,7 @@ public class WInter extends javax.swing.JFrame {
             ordenes = ordenes.getLink();
             update();
             ingresarFichero(mesa);
+}
     }//GEN-LAST:event_jButton1ActionPerformed
    
             
@@ -146,7 +147,7 @@ public class WInter extends javax.swing.JFrame {
     public static void ingresarFichero(int mesa) {
         FileWriter fw = null;
         try {
-            fw = new FileWriter("Archivos\\Facturas\\Factura"+mesa+".txt", false);
+            fw =new FileWriter("Archivos\\Facturas\\Factura"+mesa+".txt", false);
             PrintWriter pw = new PrintWriter(fw);
             Plato temp=LaPros.busMes(mesa).getPlatos();
             while (temp!= null) {
@@ -165,7 +166,6 @@ public class WInter extends javax.swing.JFrame {
                 System.out.println(e.getMessage());
             }
         }
-
     }
 
     

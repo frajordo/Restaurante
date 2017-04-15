@@ -35,6 +35,8 @@ public class W2Mesero extends javax.swing.JFrame {
                 cp.setEnabled(false);
         } else mostrarAñadir();
         if (ver2()){
+            jComboBox2.removeAllItems();
+            jComboBox3.removeAllItems();
             for (Component cp : jPanel2.getComponents())  cp.setEnabled(false);
             for (Component cp : jPanel3.getComponents())  cp.setEnabled(false);
         }else {
@@ -54,6 +56,7 @@ public class W2Mesero extends javax.swing.JFrame {
         jComboBox1.setSelectedIndex(0);
     }
     private void mostrarTomar() {
+        System.out.println("mesas "+ LaPros.busM(cc).getMesas());
             StringTokenizer st = new StringTokenizer(LaPros.busM(cc).getMesas(), ",");
             jComboBox2.removeAllItems();
             jComboBox3.removeAllItems();
