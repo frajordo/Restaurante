@@ -227,10 +227,17 @@ public class WMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
         if (Integer.parseInt(jSpinner1.getValue().toString()) > 0) {
             //Se consulta si se puede agregar con el jefe de cocina (Proximamente)
             String msg;
             if(jTable1.getSelectedRow()!=-1) {
+                String dato=String.valueOf(modelo.getValueAt(jTable1.getSelectedRow(),0));
+                String dato2=String.valueOf(modelo.getValueAt(jTable1.getSelectedRow(),2));
+               
+                if (Jcocina.VerificarIngredientes(dato, dato2)) {
+                    System.out.println("gg");
+                
                 /*obtenemos el plato con la cantidad y el precio y lo guardamos en las variables declaradas anteriormente*/
                 Plato p = new Plato(jLabel3.getText(), Integer.parseInt(jSpinner1.getValue().toString()), Float.parseFloat(jLabel4.getText().substring(2, jLabel4.getText().length())), 10);
                 Plato p1 = new Plato(jLabel3.getText(), Integer.parseInt(jSpinner1.getValue().toString()), Float.parseFloat(jLabel4.getText().substring(2, jLabel4.getText().length())), 10);
@@ -244,8 +251,9 @@ public class WMenu extends javax.swing.JFrame {
                     plato = p;
                 }
                 jLabel6.setText((Integer.parseInt(jLabel6.getText()) + 1) + "");
-                if (!jLabel6.getText().equals("0")) jButton1.setEnabled(true);
-            }else JOptionPane.showMessageDialog(this,"No ha seleccionado un plato");
+                if (!jLabel6.getText().equals("0")) jButton1.setEnabled(true)
+              }else  JOptionPane.showMessageDialog(this,"No existen cantidades nesesarias en bodega");
+          }else JOptionPane.showMessageDialog(this,"No ha seleccionado un plato");
         }else JOptionPane.showMessageDialog(this,"Erro cantidad negativa o cero");
   
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -376,4 +384,6 @@ public class WMenu extends javax.swing.JFrame {
     private javax.swing.JSpinner jSpinner1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
+
+    
 }
