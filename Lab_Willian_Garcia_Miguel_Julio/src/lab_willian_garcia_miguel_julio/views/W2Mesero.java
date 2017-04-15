@@ -56,7 +56,6 @@ public class W2Mesero extends javax.swing.JFrame {
         jComboBox1.setSelectedIndex(0);
     }
     private void mostrarTomar() {
-        System.out.println("mesas "+ LaPros.busM(cc).getMesas());
             StringTokenizer st = new StringTokenizer(LaPros.busM(cc).getMesas(), ",");
             jComboBox2.removeAllItems();
             jComboBox3.removeAllItems();

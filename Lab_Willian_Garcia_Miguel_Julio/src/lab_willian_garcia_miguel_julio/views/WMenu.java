@@ -23,7 +23,6 @@ public class WMenu extends javax.swing.JFrame {
         initComponents();
         this.anterior=anterior;
         setCombo();
-        setMenI();
         jLabel1.setText("Nombre:"+LaPros.busM(cc).getNombre());
         jLabel2.setText("Mesa:"+mesa);
         jLabel3.setText(jTable1.getModel().getValueAt(0, 0).toString());
@@ -202,14 +201,6 @@ public class WMenu extends javax.swing.JFrame {
             int numero=Integer.parseInt(jLabel2.getText().substring(5,jLabel2.getText().length()));
             table=LaPros.getMesas().busMxid(numero);
             table.setCc(cc);
-                /*
-                if (table.getPlatos()== null){//orden de tomar mesa
-                    table.setPlatos(plato);
-                    table.setCc(cc);
-                    LaPros.busM(cc).setM(numero);
-                } else {
-                    table.añadirPlatos(plato);//orden de añadir   
-                }*/
                 if(ordenes==null){
                     LaPros.busM(cc).setM(numero);//asigno mesa al mesero
                     ordenes=new Orden(numero,plato2,cc);//creo ordenes
@@ -233,12 +224,6 @@ public class WMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        /*
-       table.setPlatos(p);
-        System.out.println(table.imprimirPM(p));
-        if (!jLabel3.getText().equals("0")) {
-            jButton1.setEnabled(true);
-        }*/
         if (Integer.parseInt(jSpinner1.getValue().toString()) > 0) {
             //Se consulta si se puede agregar con el jefe de cocina (Proximamente)
             String msg;

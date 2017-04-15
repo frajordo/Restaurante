@@ -5,11 +5,25 @@ import lab_willian_garcia_miguel_julio.models.Mesa;
 import lab_willian_garcia_miguel_julio.models.Mesero;
 import lab_willian_garcia_miguel_julio.models.Orden;
 public class Restaurante {
-    public static Mesero empleados=null;    
-    public static Mesa mesas=new Mesa();
+    private static Mesero empleados=null;    
+    private static Mesa mesas=new Mesa();
     public static Orden ordenes=null;
+    private final int  numerom;
     public Restaurante(int m) {
         mesas.crearmesas(m);
+        this.numerom=m;
+    }
+
+    public int getNumerom() {
+        return numerom;
+    }
+
+    public static Mesero getEmpleados() {
+        return empleados;
+    }
+
+    public static Orden getOrden() {
+        return ordenes;
     }
      
     public void addMesero(String name,long cc){
