@@ -1,11 +1,15 @@
 package lab_willian_garcia_miguel_julio.models;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import static lab_willian_garcia_miguel_julio.views.WInter.escribirFichero;
+
 public class Mesa {
     private int id;
     private  long cc;
     private Plato platos;
     private Mesa link;
-    
     public Mesa(int id) {
         this.id=id;
         cc=0;
@@ -27,14 +31,36 @@ public class Mesa {
     public void crearmesas(int m){
         Mesa temp=this;
         this.setId(1);
+        crearA(1);
         int i=1;
         while (i<m) {
             temp.setLink(new Mesa((i+1)));
+            crearA(i+1);
             temp=temp.getLink();
             i++;
         }
     }
-
+    public void crearA(int i){
+            FileWriter fw = null;
+            try {
+                
+            File archivo = new File("Archivos\\Facturas\\Factura"+i+".txt");
+            fw = new FileWriter(archivo, false);
+            PrintWriter pw = new PrintWriter(fw);
+            escribirFichero(pw,"");
+            System.out.println(i);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            } finally {
+                try {
+                    if (fw != null) {
+                        fw.close();
+                    }
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+            }
+    }
     public Mesa getLink() {
         return link;
     }
@@ -126,6 +152,7 @@ public String imprimirPM(){
             str+=temp.getName()+" "+temp.getCant()+"\n";
             temp = platos.getLink();
             while (temp != null) {
+                System.out.println(temp.getName()+" "+temp.getCant()+temp.getLink());
                 str+=temp.getName()+" "+temp.getCant()+"\n";
                 temp=temp.getLink();
             }

@@ -93,6 +93,9 @@
           <Connection code="&quot;&lt;html&gt;Eliminar&lt;br/&gt;Orden&lt;/html&gt;&quot;" type="code"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton3ActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

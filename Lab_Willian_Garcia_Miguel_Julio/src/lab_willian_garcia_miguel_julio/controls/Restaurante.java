@@ -1,8 +1,9 @@
 package lab_willian_garcia_miguel_julio.controls;
+import java.io.File;
+import java.io.FileWriter;
 import lab_willian_garcia_miguel_julio.models.Mesa;
 import lab_willian_garcia_miguel_julio.models.Mesero;
 import lab_willian_garcia_miguel_julio.models.Orden;
-
 public class Restaurante {
     public static Mesero empleados=null;    
     public static Mesa mesas=new Mesa();
@@ -10,7 +11,7 @@ public class Restaurante {
     public Restaurante(int m) {
         mesas.crearmesas(m);
     }
-    
+     
     public void addMesero(String name,long cc){
             if (empleados == null)  empleados=new Mesero(name,cc);
              else empleados.addMesero(name, cc);

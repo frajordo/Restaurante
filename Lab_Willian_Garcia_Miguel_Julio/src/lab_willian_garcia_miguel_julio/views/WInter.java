@@ -7,8 +7,12 @@ package lab_willian_garcia_miguel_julio.views;
 
 import java.io.BufferedReader;
 import java.io.DataInputStream;
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileWriter;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.util.Scanner;
 import java.util.StringTokenizer;
 import javax.swing.table.DefaultTableModel;
 import static lab_willian_garcia_miguel_julio.controls.Lab_Willian_Garcia_Miguel_Julio.LaPros;
@@ -16,17 +20,20 @@ import static lab_willian_garcia_miguel_julio.controls.Restaurante.ordenes;
 import lab_willian_garcia_miguel_julio.models.Mesa;
 import lab_willian_garcia_miguel_julio.models.Orden;
 import lab_willian_garcia_miguel_julio.models.Plato;
+import static lab_willian_garcia_miguel_julio.views.WMesero.cc;
 
 /**
  *
  * @author Administrador
  */
 public class WInter extends javax.swing.JFrame {
-public static Plato plato=null,plato2=null;
+
+    public static Plato plato = null, plato2 = null;
     public static Mesa mesas;
     public static Plato platos;
     public static Orden temp = null;
-    public static String msg="";
+    public static String msg = "";
+
     public WInter() {
         initComponents();
         update();
@@ -73,6 +80,11 @@ public static Plato plato=null,plato2=null;
         });
 
         jButton3.setText("<html>Eliminar<br/>Orden</html>");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -104,44 +116,59 @@ public static Plato plato=null,plato2=null;
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       //"N° Orden", "Mesa","Mesero"
-       int n=jTable1.getSelectedRow();
-        if (n != -1) {
+
+        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+        int n = 0;
             Orden temp = ordenes;
-                int i = 0;
-                while (i!=n) {
-                    temp=temp.getLink();
-                    i++;
-                }
-            Mesa m=LaPros.busMes(Integer.parseInt(jTable1.getValueAt(n,1).toString()));
-            if(m.getPlatos()==null){
-                m.setPlatos(temp.getPedido());
-                System.out.println(m.imprimirPM());
-            }else{
-                m.añadirPlatos(temp.getPedido());
-                System.out.println(m.imprimirPM());
+            int i = 0,mesa=Integer.parseInt(modelo.getValueAt(0, 1).toString());
+            while (i != n) {
+                temp = temp.getLink();
+                i++;
             }
-            ordenes=ordenes.getLink();
+            Mesa m = LaPros.busMes(Integer.parseInt(jTable1.getValueAt(n, 1).toString()));
+            if (m.getPlatos() == null) {
+                m.setPlatos(temp.getPedido());
+            } else {
+                m.añadirPlatos(temp.getPedido());
+            }
+            ordenes = ordenes.getLink();
             update();
-        }else{
-            System.out.println("No ha seleccionado una orden");
-        }
+            ingresarFichero(mesa);
     }//GEN-LAST:event_jButton1ActionPerformed
+   
+            
+    public static void escribirFichero(PrintWriter pw,String msg) throws Exception {
+        Scanner teclado = new Scanner(System.in);
+        pw.print(msg);
+        pw.println();
+    }
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        if (jTable1.getSelectedRow() != -1) {
-            WOrden v1=new WOrden(this,msg,jTable1.getSelectedRow());
-            v1.setVisible(true);
-            this.setVisible(false);
-        }else{
-            System.out.println("No ha seleccionado una orden");
+    public static void ingresarFichero(int mesa) {
+        FileWriter fw = null;
+        try {
+            fw = new FileWriter("Archivos\\Facturas\\Factura"+mesa+".txt", false);
+            PrintWriter pw = new PrintWriter(fw);
+            Plato temp=LaPros.busMes(mesa).getPlatos();
+            while (temp!= null) {
+                escribirFichero(pw,temp.getName()+";"+temp.getCant()+";"+temp.getPrec()+";"+cc);
+                temp = temp.getLink();
+            }
+            
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (fw != null) {
+                    fw.close();
+                }
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
         }
-        
-    }//GEN-LAST:event_jButton2ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    }
+
+    
     public void update() {
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
         for (int i = modelo.getRowCount() - 1; i >= 0; i--) {
@@ -149,20 +176,38 @@ public static Plato plato=null,plato2=null;
         }
         temp = ordenes;
         int i = 1;
-        msg="";
+        msg = "";
         while (temp != null) {
             Plato temp2 = null;
             temp2 = temp.getPedido();
-            while(temp2!=null){
-            msg+=temp2.getName()+","+temp2.getCant()+",";
-            temp2=temp2.getLink();
+            while (temp2 != null) {
+                msg += temp2.getName() + "," + temp2.getCant() + ",";
+                temp2 = temp2.getLink();
             }
-            msg+=";";
+            msg += ";";
             modelo.addRow(new Object[]{i, temp.getMesa(), temp.getMesero()});
             i++;
             temp = temp.getLink();
         }
     }
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        if (jTable1.getSelectedRow() != -1) {
+            WOrden v1 = new WOrden(this, msg, jTable1.getSelectedRow());
+            v1.setVisible(true);
+            this.setVisible(false);
+        } else {
+            System.out.println("No ha seleccionado una orden");
+        }
+
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

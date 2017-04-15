@@ -211,11 +211,10 @@ public class WMenu extends javax.swing.JFrame {
                     table.añadirPlatos(plato);//orden de añadir   
                 }*/
                 if(ordenes==null){
-                    System.out.println("lleno");
                     LaPros.busM(cc).setM(numero);//asigno mesa al mesero
                     ordenes=new Orden(numero,plato2,cc);//creo ordenes
                 }else{
-                    if(ordenes.busO(numero)) LaPros.busM(cc).setM(numero);////asigno mesa al mesero si no en
+                    if(!ordenes.busO(numero)) LaPros.busM(cc).setM(numero);////asigno mesa al mesero si no en
                     ordenes.addOrden(numero,plato2,cc);
                 }
                 //plato=null;
