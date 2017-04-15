@@ -170,10 +170,14 @@ public class WGerente extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String mesa=jComboBox1.getSelectedItem().toString();
-        W2Gerente v1= new W2Gerente(this,mesa);
-        v1.setVisible(true);
-        this.setVisible(false);
+        try {
+            String mesa=jComboBox1.getSelectedItem().toString();
+            W2Gerente v1= new W2Gerente(this,mesa);
+            v1.setVisible(true);
+            this.setVisible(false);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(WGerente.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

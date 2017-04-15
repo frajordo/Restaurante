@@ -251,7 +251,7 @@ public class WMenu extends javax.swing.JFrame {
                     plato = p;
                 }
                 jLabel6.setText((Integer.parseInt(jLabel6.getText()) + 1) + "");
-                if (!jLabel6.getText().equals("0")) jButton1.setEnabled(true)
+                if (!jLabel6.getText().equals("0")) jButton1.setEnabled(true);
               }else  JOptionPane.showMessageDialog(this,"No existen cantidades nesesarias en bodega");
           }else JOptionPane.showMessageDialog(this,"No ha seleccionado un plato");
         }else JOptionPane.showMessageDialog(this,"Erro cantidad negativa o cero");
