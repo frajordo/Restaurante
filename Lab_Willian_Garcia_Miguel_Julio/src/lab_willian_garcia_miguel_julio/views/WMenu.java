@@ -10,6 +10,7 @@ import javax.swing.table.DefaultTableModel;
 import static lab_willian_garcia_miguel_julio.controls.Lab_Willian_Garcia_Miguel_Julio.LaPros;
 import static lab_willian_garcia_miguel_julio.controls.Lab_Willian_Garcia_Miguel_Julio.updateWInter;
 import static lab_willian_garcia_miguel_julio.controls.Restaurante.ordenes;
+import lab_willian_garcia_miguel_julio.models.JefeCocina;
 import lab_willian_garcia_miguel_julio.models.Mesa;
 import lab_willian_garcia_miguel_julio.models.Orden;
 import lab_willian_garcia_miguel_julio.models.Plato;
@@ -19,8 +20,10 @@ import static lab_willian_garcia_miguel_julio.views.WMesero.cc;
 public class WMenu extends javax.swing.JFrame {
     public static W2Mesero anterior;
     public static Plato plato=null,plato2=null;
+    public static JefeCocina Jcocina;
     public WMenu(W2Mesero anterior) {
         initComponents();
+        Jcocina= new JefeCocina(Jcocina);
         this.anterior=anterior;
         setCombo();
         jLabel1.setText("Nombre:"+LaPros.busM(cc).getNombre());
@@ -242,7 +245,6 @@ public class WMenu extends javax.swing.JFrame {
                 }
                 jLabel6.setText((Integer.parseInt(jLabel6.getText()) + 1) + "");
                 if (!jLabel6.getText().equals("0")) jButton1.setEnabled(true);
-                //plato.imprimir();
             }else JOptionPane.showMessageDialog(this,"No ha seleccionado un plato");
         }else JOptionPane.showMessageDialog(this,"Erro cantidad negativa o cero");
   
