@@ -3,7 +3,7 @@ TOMATE;300;Unidades;
 AJO;100;Unidades;
 PIMIENTOS;300;Unidades;
 CEBOLLA;300;Unidades;
-LECHUGA;100;Unidades;
+LECHUGA;0;Unidades;
 PASTA DE TOMATE;80;Unidades;
 PIERNAS DE POLLO;360;Unidades;
 MATEQUILLA;300;Unidades
