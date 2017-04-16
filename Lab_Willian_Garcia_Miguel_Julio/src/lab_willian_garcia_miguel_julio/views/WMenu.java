@@ -234,15 +234,17 @@ public class WMenu extends javax.swing.JFrame {
             if(jTable1.getSelectedRow()!=-1) {
                 String dato=String.valueOf(modelo.getValueAt(jTable1.getSelectedRow(),0));
                 String dato2=String.valueOf(modelo.getValueAt(jTable1.getSelectedRow(),2));
-               
                 if (Jcocina.VerificarIngredientes(dato, dato2)) {
                     System.out.println("gg");
-                
                 /*obtenemos el plato con la cantidad y el precio y lo guardamos en las variables declaradas anteriormente*/
+                Plato p1 =  new Plato(jLabel3.getText(), Integer.parseInt(jSpinner1.getValue().toString()), Float.parseFloat(jLabel4.getText().substring(2, jLabel4.getText().length())), 10,jTable1.getValueAt(jTable1.getSelectedRow(), 2).toString());
                 Plato p = new Plato(jLabel3.getText(), Integer.parseInt(jSpinner1.getValue().toString()), Float.parseFloat(jLabel4.getText().substring(2, jLabel4.getText().length())), 10,jTable1.getValueAt(jTable1.getSelectedRow(), 2).toString());
                 if (plato == null){
                     plato = p;
+                    plato2=p1;
                 }else {
+                    p1.setLink(plato2);
+                    plato2=p1;
                     p.setLink(plato);
                     plato = p;
                 }

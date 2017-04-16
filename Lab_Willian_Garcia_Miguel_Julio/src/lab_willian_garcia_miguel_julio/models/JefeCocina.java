@@ -36,7 +36,6 @@ public class JefeCocina {
             String lineaEncontrada = null;
             while ((linea = br.readLine()) != null && !encontrado) {// buscar la cadena palabra en la linea leida
                 if (linea.contains(lineaBuscar)) {
-                    contador2 = contador2 + 1;
                     encontrado = true;
                     lineaEncontrada = linea;
                     StringTokenizer st = new StringTokenizer(lineaEncontrada, ";");
@@ -66,16 +65,17 @@ public class JefeCocina {
                                     StringTokenizer st3 = new StringTokenizer(lineaEncontrada2, ";");
                                     st3.nextToken();
                                     String h = st3.nextToken();
-                                    double V = Integer.parseInt(h);
-                                    double w = Intege
+                                    double V = Double.parseDouble(h);
+                                    double w = Double.parseDouble(temp2);
                                     if (V > w) {
                                         uu = uu + 1;
-                                        System.out.println(uu);
+                                        System.out.println(temp+":)");
+                                    }else{
+                                        System.out.println(temp);
+                                        return false;
                                     }
                                     encontrado2 = true;
-                                } else {
-                                    System.out.println("no contiene estoooooo");
-                                }
+                                } 
                             }
                             try {
                                 if (null != fr2) {
@@ -92,7 +92,6 @@ public class JefeCocina {
                     }
                 }
                 }
-            }
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -200,15 +199,8 @@ public class JefeCocina {
     }
 
     public void borrarExistencias(String variable, String lineaBuscar) {
-        int yy = 0;
         String ww="";
         int yyy = 0;
-        int contador = 0;
-        int contador2 = 0;
-        int contador3 = 0;
-        int contador4 = 0;
-        int contador5 = 0;
-        int contador6 = 0;
         int uu = 0;
         File archivo = null;
         FileReader fr = null;
@@ -227,9 +219,7 @@ public class JefeCocina {
 
             while ((linea = br.readLine()) != null && !encontrado) {
 // buscar la cadena palabra en la linea leida
-                contador = contador + 1;
                 if (linea.contains(lineaBuscar)) {
-                    contador2 = contador2 + 1;
                     encontrado = true;
                     lineaEncontrada = linea;
                     StringTokenizer st = new StringTokenizer(lineaEncontrada, ";");
@@ -254,7 +244,6 @@ public class JefeCocina {
                             linea2 = br2.readLine();
                             while ((linea2 = br2.readLine()) != null && encontrado2 != true) {
 // buscar la cadena palabra en la linea leida
-                                yy = yy + 1;
                                 System.out.println(temp);
                                 if (linea2.contains(temp)) {
                                     System.out.println(temp);
@@ -271,9 +260,8 @@ public class JefeCocina {
                                         ModificarFichero(archivo2, linea2,ww );
                                     }
                                     encontrado2 = true;
-                                } else {
-                                    System.out.println("no contiene estoooooo");
-                                }
+                                    System.out.println(temp2 +" "+temp);
+                                } 
                             }
                             try {
                                 if (null != fr2) {
