@@ -20,6 +20,7 @@ import static lab_willian_garcia_miguel_julio.controls.Restaurante.ordenes;
 import lab_willian_garcia_miguel_julio.models.Mesa;
 import lab_willian_garcia_miguel_julio.models.Orden;
 import lab_willian_garcia_miguel_julio.models.Plato;
+import static lab_willian_garcia_miguel_julio.views.WMenu.Jcocina;
 import static lab_willian_garcia_miguel_julio.views.WMesero.cc;
 
 /**
@@ -134,6 +135,7 @@ if(ordenes!=null){
             ordenes = ordenes.getLink();
             update();
             ingresarFichero(mesa);
+            //Jcocina.borrarExistencias();
 }
     }//GEN-LAST:event_jButton1ActionPerformed
    

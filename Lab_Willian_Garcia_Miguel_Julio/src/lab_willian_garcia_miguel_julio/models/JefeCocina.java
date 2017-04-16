@@ -10,79 +10,90 @@ import java.util.Random;
 import java.util.StringTokenizer;
 
 public class JefeCocina {
-private JefeCocina JCocina;
+
+    private JefeCocina JCocina;
 
     public JefeCocina(JefeCocina JCocina) {
         this.JCocina = JCocina;
     }
 
     public boolean VerificarIngredientes(String lineaBuscar, String varaible) {
-        System.out.println(lineaBuscar);
-        int yy=0;
-int uu=0;
+        int yyy = 0;
+        int uu = 0;
         File archivo = null;
         FileReader fr = null;
         BufferedReader br = null;
-        File archivo2 = null;
-        FileReader fr2 = null;
-        BufferedReader br2 = null;
-        
+
         try {
 // Apertura del fichero y creacion de BufferedReader para poder
 // hacer una lectura comoda (disponer del metodo readLine()).
             archivo = new File("Archivos\\Ingredientes\\I" + varaible + ".txt");
-            archivo2 = new File("Archivos\\Provisiones\\pro.txt");
             fr = new FileReader(archivo);
             br = new BufferedReader(fr);
-            fr2 = new FileReader(archivo2);
-            br2 = new BufferedReader(fr2);
         // Lectura del fichero linea a linea
             String linea;
             boolean encontrado = false;
             String lineaEncontrada = null;
             while ((linea = br.readLine()) != null && !encontrado) {// buscar la cadena palabra en la linea leida
                 if (linea.contains(lineaBuscar)) {
+                    contador2 = contador2 + 1;
                     encontrado = true;
                     lineaEncontrada = linea;
                     StringTokenizer st = new StringTokenizer(lineaEncontrada, ";");
                     String g = st.nextToken();
                     StringTokenizer st2 = new StringTokenizer(g, ",");
                     int i = 0;
-                    String temp;
+                    String temp = "";
                     String temp2;
-                    while (i<st2.countTokens()) {
+                    yyy = st2.countTokens();
+                    temp = st2.nextToken();
+                    while (i < yyy - 1) {
+                        temp2 = temp;
                         temp = st2.nextToken();
                         if (i % 2 != 0) {
-                            temp2 = st2.nextToken();
                             boolean encontrado2 = false;
+                            File archivo2 = new File("Archivos\\Provisiones\\Pro.txt");
                             String lineaEncontrada2 = null;
+
+                            FileReader fr2 = new FileReader(archivo2);
+                            BufferedReader br2 = new BufferedReader(fr2);
                             String linea2;
-                               while ((linea2 = br2.readLine()) != null) {
-// buscar la cadena palabra en la linea leida
-                                yy=yy+1;
-                                if (linea2.contains(temp2)) {
+                            linea2 = br2.readLine();
+                            while ((linea2 = br2.readLine()) != null && encontrado2 != true) {
+                            // buscar la cadena palabra en la linea leida
+                                if (linea2.contains(temp)) {
                                     lineaEncontrada2 = linea2;
                                     StringTokenizer st3 = new StringTokenizer(lineaEncontrada2, ";");
                                     st3.nextToken();
                                     String h = st3.nextToken();
-                                    int V = Integer.parseInt(h);
-                                    int w = Integer.parseInt(temp);
+                                    double V = Integer.parseInt(h);
+                                    double w = Intege
                                     if (V > w) {
-                                        uu=uu+1;
-                                      
+                                        uu = uu + 1;
+                                        System.out.println(uu);
                                     }
-
+                                    encontrado2 = true;
+                                } else {
+                                    System.out.println("no contiene estoooooo");
                                 }
-                             
                             }
-
+                            try {
+                                if (null != fr2) {
+                                    fr2.close();
+                                }
+                                if (br2 != null) {
+                                    br2.close();
+                                }
+                            } catch (Exception e2) {
+                                e2.printStackTrace();
+                            }
                         }
-
                         i++;
                     }
                 }
+                }
             }
-            
+
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -91,7 +102,6 @@ int uu=0;
             try {
                 if (null != fr) {
                     fr.close();
-                    
                 }
                 if (br != null) {
                     br.close();
@@ -99,26 +109,14 @@ int uu=0;
             } catch (Exception e2) {
                 e2.printStackTrace();
             }
-            try {
-                if (null != fr2) {
-                    fr2.close();
-                    
-                }
-                if (br2 != null) {
-                    br2.close();
-                }
-            } catch (Exception e2) {
-                e2.printStackTrace();
-            }
+
         } // fin finally
-        
-        
-        if (yy==uu) {
-        return true;    
-        }else{
-        return false;
+
+        if (((yyy + 1) / 2) == uu || (yyy / 2) == uu) {
+            return true;
+        } else {
+            return false;
         }
-       
 
     }
 
@@ -199,6 +197,120 @@ int uu=0;
             /*Captura un posible error y le imprime en pantalla*/
             System.out.println(ex.getMessage());
         }
+    }
+
+    public void borrarExistencias(String variable, String lineaBuscar) {
+        int yy = 0;
+        String ww="";
+        int yyy = 0;
+        int contador = 0;
+        int contador2 = 0;
+        int contador3 = 0;
+        int contador4 = 0;
+        int contador5 = 0;
+        int contador6 = 0;
+        int uu = 0;
+        File archivo = null;
+        FileReader fr = null;
+        BufferedReader br = null;
+
+        try {
+// Apertura del fichero y creacion de BufferedReader para poder
+// hacer una lectura comoda (disponer del metodo readLine()).
+            archivo = new File("Archivos\\Ingredientes\\I" + variable + ".txt");
+            fr = new FileReader(archivo);
+            br = new BufferedReader(fr);
+// Lectura del fichero linea a linea
+            String linea;
+            boolean encontrado = false;
+            String lineaEncontrada = null;
+
+            while ((linea = br.readLine()) != null && !encontrado) {
+// buscar la cadena palabra en la linea leida
+                contador = contador + 1;
+                if (linea.contains(lineaBuscar)) {
+                    contador2 = contador2 + 1;
+                    encontrado = true;
+                    lineaEncontrada = linea;
+                    StringTokenizer st = new StringTokenizer(lineaEncontrada, ";");
+                    String g = st.nextToken();
+                    StringTokenizer st2 = new StringTokenizer(g, ",");
+                    int i = 0;
+                    String temp = "";
+                    String temp2;
+                    yyy = st2.countTokens();
+                    temp = st2.nextToken();
+                    while (i < yyy - 1) {
+                        temp2 = temp;
+                        temp = st2.nextToken();
+                        if (i % 2 != 0) {
+                            //temp2 = st2.nextToken();
+                            boolean encontrado2 = false;
+                            File archivo2 = new File("Archivos\\Provisiones\\Pro.txt");
+                            String lineaEncontrada2 = null;
+                            FileReader fr2 = new FileReader(archivo2);
+                            BufferedReader br2 = new BufferedReader(fr2);
+                            String linea2;
+                            linea2 = br2.readLine();
+                            while ((linea2 = br2.readLine()) != null && encontrado2 != true) {
+// buscar la cadena palabra en la linea leida
+                                yy = yy + 1;
+                                System.out.println(temp);
+                                if (linea2.contains(temp)) {
+                                    System.out.println(temp);
+                                    lineaEncontrada2 = linea2;
+                                    StringTokenizer st3 = new StringTokenizer(lineaEncontrada2, ";");
+                                   ww= st3.nextToken();
+                                    String h = st3.nextToken();
+                                    ww=ww+";"+h+";"+st3.nextToken();
+                                    double V = Integer.parseInt(h);
+                                    double w = Integer.parseInt(temp2);
+                                    System.out.println(V);
+                                    System.out.println(w);
+                                    if (V > w) {
+                                        ModificarFichero(archivo2, linea2,ww );
+                                    }
+                                    encontrado2 = true;
+                                } else {
+                                    System.out.println("no contiene estoooooo");
+                                }
+                            }
+                            try {
+                                if (null != fr2) {
+                                    fr2.close();
+                                }
+                                if (br2 != null) {
+                                    br2.close();
+                                }
+                            } catch (Exception e2) {
+                                e2.printStackTrace();
+                            }
+                        }
+                        i++;
+                    }
+                } else {
+                    System.out.println("no existe");
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+// En el finally cerrar el fichero, para asegurarse
+// que se cierra tanto si todo va bien como si salta una excepcion.
+            try {
+                if (null != fr) {
+                    fr.close();
+                }
+                if (br != null) {
+                    br.close();
+                }
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+
+        } // fin finally
+
     }
 
 }
