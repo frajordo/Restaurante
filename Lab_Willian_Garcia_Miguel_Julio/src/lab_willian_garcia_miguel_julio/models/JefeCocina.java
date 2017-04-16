@@ -25,8 +25,8 @@ public class JefeCocina {
         BufferedReader br = null;
 
         try {
-    // Apertura del fichero y creacion de BufferedReader para poder
-    // hacer una lectura comoda (disponer del metodo readLine()).
+// Apertura del fichero y creacion de BufferedReader para poder
+// hacer una lectura comoda (disponer del metodo readLine()).
             archivo = new File("Archivos\\Ingredientes\\I" + varaible + ".txt");
             fr = new FileReader(archivo);
             br = new BufferedReader(fr);
@@ -91,6 +91,7 @@ public class JefeCocina {
                         i++;
                     }
                 }
+                }
             }
 
         } catch (Exception e) {
@@ -117,8 +118,8 @@ public class JefeCocina {
             return false;
         }
 
-    
     }
+
     public void ModificarFichero(File FficheroAntiguo, String Satigualinea, String Snuevalinea) {
         /*Obtengo un numero aleatorio*/
         Random numaleatorio = new Random(3816L);
