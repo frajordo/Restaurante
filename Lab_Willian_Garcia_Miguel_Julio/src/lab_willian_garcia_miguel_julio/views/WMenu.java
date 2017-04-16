@@ -123,7 +123,7 @@ public class WMenu extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(4, 4, 4)
@@ -132,11 +132,12 @@ public class WMenu extends javax.swing.JFrame {
                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jLabel3)
                     .addComponent(jLabel4)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
-                        .addComponent(jButton3))
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton3)
+                        .addGap(120, 120, 120))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -167,10 +168,8 @@ public class WMenu extends javax.swing.JFrame {
                         .addGap(11, 11, 11)
                         .addComponent(jLabel4)
                         .addGap(26, 26, 26)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(1, 1, 1)
-                                .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton3))
                         .addGap(18, 18, 18)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -241,7 +240,8 @@ public class WMenu extends javax.swing.JFrame {
             if(jTable1.getSelectedRow()!=-1) {
                 String dato=String.valueOf(modelo.getValueAt(jTable1.getSelectedRow(),0));
                 String dato2=String.valueOf(modelo.getValueAt(jTable1.getSelectedRow(),2));
-                if (Jcocina.VerificarIngredientes(dato, dato2)) {
+                String dato3=jSpinner1.getValue().toString();
+                if (Jcocina.VerificarIngredientes(dato, dato2,dato3)) {
                 /*obtenemos el plato con la cantidad y el precio y lo guardamos en las variables declaradas anteriormente*/
                 Plato p1= new Plato(jLabel3.getText(), Integer.parseInt(jSpinner1.getValue().toString()), Float.parseFloat(jLabel4.getText().substring(2, jLabel4.getText().length())), 10,jTable1.getValueAt(jTable1.getSelectedRow(), 2).toString());
                 Plato p = new Plato(jLabel3.getText(), Integer.parseInt(jSpinner1.getValue().toString()), Float.parseFloat(jLabel4.getText().substring(2, jLabel4.getText().length())), 10,jTable1.getValueAt(jTable1.getSelectedRow(), 2).toString());

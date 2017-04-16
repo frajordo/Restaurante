@@ -17,9 +17,10 @@ public class JefeCocina {
         this.JCocina = JCocina;
     }
 
-    public boolean VerificarIngredientes(String lineaBuscar, String varaible) {
+    public boolean VerificarIngredientes(String lineaBuscar, String varaible,String cantidad) {
+        double cant = Double.parseDouble(cantidad);
         int yyy = 0;
-        int uu = 0;
+        int uu = 1;
         File archivo = null;
         FileReader fr = null;
         BufferedReader br = null;
@@ -65,8 +66,10 @@ public class JefeCocina {
                                     StringTokenizer st3 = new StringTokenizer(lineaEncontrada2, ";");
                                     st3.nextToken();
                                     String h = st3.nextToken();
+                                    double w=0;
                                     double V = Double.parseDouble(h);
-                                    double w = Double.parseDouble(temp2);
+                                    double r = Double.parseDouble(temp2);
+                                    w=r*cant;
                                     if (V > w) {
                                         uu = uu + 1;
                                     }else{
@@ -196,8 +199,19 @@ public class JefeCocina {
         }
     }
 
-    public void borrarExistencias(String variable, String lineaBuscar) {
+    public void borrarExistencias(String variable, String lineaBuscar,String cantidad) {
+        StringTokenizer st6= new StringTokenizer(lineaBuscar,",");
+        int yyyy=st6.countTokens();
+        int termidado=0;
+        while(termidado<yyyy-3){
+            String nombre =st6.nextToken();
+            String cant1=st6.nextToken();
+            System.out.println(lineaBuscar);
+            String categoria=st6.nextToken();
+            categoria = categoria.substring(0, categoria.length()-1);
+            int cant=Integer.parseInt(cant1);
         String ww="";
+        lineaBuscar=nombre;
         int yyy = 0;
         int uu = 0;
         File archivo = null;
@@ -207,7 +221,7 @@ public class JefeCocina {
         try {
 // Apertura del fichero y creacion de BufferedReader para poder
 // hacer una lectura comoda (disponer del metodo readLine()).
-            archivo = new File("Archivos\\Ingredientes\\I" + variable + ".txt");
+            archivo = new File("Archivos\\Ingredientes\\I" + categoria+ ".txt");
             fr = new FileReader(archivo);
             br = new BufferedReader(fr);
 // Lectura del fichero linea a linea
@@ -249,7 +263,8 @@ public class JefeCocina {
                                     StringTokenizer st3 = new StringTokenizer(lineaEncontrada2, ";");
                                    ww= st3.nextToken();
                                     String h = st3.nextToken();
-                                    ww=ww+";"+h+";"+st3.nextToken();
+                                    double menos=((Double.parseDouble(h))-(cant));
+                                    ww=ww+";"+cant+";"+st3.nextToken();
                                     double V = Integer.parseInt(h);
                                     double w = Integer.parseInt(temp2);
                                     System.out.println(V);
@@ -296,7 +311,7 @@ public class JefeCocina {
             }
 
         } // fin finally
-
+        }
     }
 
 }

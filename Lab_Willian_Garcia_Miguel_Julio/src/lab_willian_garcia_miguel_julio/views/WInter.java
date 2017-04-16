@@ -145,6 +145,8 @@ if(ordenes!=null){
                 m.añadirPlatos(temp.getPedido());
             }
             ordenes = ordenes.getLink();
+            String c="";
+            Jcocina.borrarExistencias(c, msg,c);
             update();
             ingresarFichero(mesa);
             //Jcocina.borrarExistencias();
