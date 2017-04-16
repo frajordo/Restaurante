@@ -44,41 +44,55 @@ public class WFactura extends javax.swing.JFrame {
     public void facturar(int mesa) throws Exception {
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
         BufferedReader br = new BufferedReader(new FileReader("Archivos\\Facturas\\Factura" + mesa + ".txt"));
-        String linea= br.readLine();
+        String linea = br.readLine();
         FileWriter fw = new FileWriter("Archivos\\Mesas\\mesa" + mesa + ".txt", true);
         PrintWriter pw = new PrintWriter(fw);
-        float total=0;
+        float total = 0;
         while (linea != null) {
-            if(!linea.equals(""))pw.println(linea);
-            StringTokenizer st = new StringTokenizer(linea, ";");
-            while (st.hasMoreTokens()) {
-                String pd = st.nextToken(), c = st.nextToken(), pr = st.nextToken();
-                double subtotal = Double.parseDouble(c) * Double.parseDouble(pr);
-                total+=subtotal;
-                //consolidado cat.
-                BufferedReader br1 = new BufferedReader(new FileReader("Archivos\\Consolidados\\Categorias.txt"));
-                String temp=br1.readLine();
-                FileWriter fw1 = new FileWriter("Archivos\\Consolidados\\Categorias.txt", true);
-                PrintWriter pw1 = new PrintWriter(fw);
-                boolean a=true;
-                while(temp!=null && a){
-                    StringTokenizer st2= new StringTokenizer(temp,";");
-                    if(st2.nextToken().equals(pd)){
-                        a=false;
-                    }
+            if (!linea.equals("")) {
+                pw.println(linea);//Añadir a mesa general
+                StringTokenizer st = new StringTokenizer(linea, ";");
+                //añador a jtable;
+                while (st.hasMoreTokens()) {
+                    String pd = st.nextToken(), c = st.nextToken(), pr = st.nextToken();
+                    double subtotal = Double.parseDouble(c) * Double.parseDouble(pr);
+                    total += subtotal;
+                    modelo.addRow(new Object[]{pd, c, pr, subtotal});
+                    st.nextToken();
+                    st.nextToken();
                 }
-                if(a)pw1.println(c);
+                //crear/añadir consolidado platos
+                st = new StringTokenizer(linea, ";");
+                FileWriter fw2 = new FileWriter("Archivos\\Consolidados\\Platos.txt", true);
+                PrintWriter pw2 = new PrintWriter(fw2);
+                while (st.hasMoreTokens()) {
+                    String pd = st.nextToken(), c = st.nextToken();
+                    pw2.println(pd+";"+c);
+                    st.nextToken();
+                    st.nextToken();//cat
+                    st.nextToken();
+                }
+                fw2.close();
+                pw2.close();
+                //crear/añadir consolidado cat
+                st = new StringTokenizer(linea, ";");
+                 fw2 = new FileWriter("Archivos\\Consolidados\\Categorias.txt", true);
+                 pw2 = new PrintWriter(fw2);
+                while (st.hasMoreTokens()) {
+                    st.nextToken();
+                    String c = st.nextToken();
+                    st.nextToken();
+                    String cat = st.nextToken();
+                    st.nextToken();
+                    pw2.println(cat+";"+c);
+                }
+                fw2.close();
+                pw2.close();
                 
-                //consolidado platos
-                fw1 = new FileWriter("Archivos\\Mesas\\mesa" + mesa + ".txt", true);
-                pw1 = new PrintWriter(fw);
-                
-                modelo.addRow(new Object[]{pd, c, pr, subtotal});
-                st.nextToken();
             }
             linea = br.readLine();
         }
-        modelo.addRow(new Object[]{"", "","Total", total});
+        modelo.addRow(new Object[]{"", "", "Total", total});
         pw.close();
         fw = new FileWriter("Archivos\\Facturas\\Factura" + mesa + ".txt", false);
         pw = new PrintWriter(fw);
@@ -90,11 +104,9 @@ public class WFactura extends javax.swing.JFrame {
         if (ordenes == null) {
             LaPros.busM(cc).delM(mesa);
             temp.setCc(0);
-        } else {
-            if (!ordenes.busO(mesa)) {
-                LaPros.busM(cc).delM(mesa);
-                temp.setCc(0);
-            }
+        } else if (!ordenes.busO(mesa)) {
+            LaPros.busM(cc).delM(mesa);
+            temp.setCc(0);
         }
     }
 
@@ -135,19 +147,15 @@ public class WFactura extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(6, 6, 6)
+                .addComponent(jButton1))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(103, 103, 103)
-                .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jButton1))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

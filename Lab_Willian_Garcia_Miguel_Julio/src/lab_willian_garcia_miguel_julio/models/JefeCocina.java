@@ -69,13 +69,11 @@ public class JefeCocina {
                                     double w = Double.parseDouble(temp2);
                                     if (V > w) {
                                         uu = uu + 1;
-                                        System.out.println(temp+":)");
                                     }else{
-                                        System.out.println(temp);
                                         return false;
                                     }
                                     encontrado2 = true;
-                                } 
+                                }
                             }
                             try {
                                 if (null != fr2) {

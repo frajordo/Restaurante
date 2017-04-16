@@ -5,7 +5,11 @@
  */
 package lab_willian_garcia_miguel_julio.views;
 
+import java.io.BufferedReader;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -42,11 +46,11 @@ public class WGerente extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
@@ -55,6 +59,12 @@ public class WGerente extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("Resumen detallado");
+
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("Resumen");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -68,26 +78,25 @@ public class WGerente extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addComponent(jLabel1))
+            .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(21, 21, 21))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(60, 60, 60)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(61, 61, 61)
+                .addComponent(jButton1))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(11, 11, 11)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton1)))
         );
 
         jButton2.setText("<html>Total<br/>Ventas</html>");
@@ -97,7 +106,12 @@ public class WGerente extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setText("jButton3");
+        jButton3.setText("<html>Plato<br/>Mas vendido</html>");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("<html>Mesero con<br/>mayor gestion</html>");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -106,53 +120,64 @@ public class WGerente extends javax.swing.JFrame {
             }
         });
 
-        jButton5.setText("jButton5");
+        jButton5.setText("<html>5 categorias<br/>Mas vendidas</html>");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jButton4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(32, Short.MAX_VALUE))
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(30, 30, 30)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
                     .addComponent(jButton3))
-                .addGap(33, 33, 33)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton4)
                     .addComponent(jButton5))
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(55, 55, 55)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(44, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -168,6 +193,106 @@ public class WGerente extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        try {
+            String msg=catMas(),out="";
+            if(msg.equals("")){
+                JOptionPane.showMessageDialog(null, "No se ha vendido ningun plato");
+            }else{
+                StringTokenizer st= new StringTokenizer(msg,";");
+                if(st.countTokens()<=10){
+                    while(st.hasMoreTokens()){
+                        out+=st.nextToken()+"->"+st.nextToken()+"\n";
+                    }
+                    JOptionPane.showMessageDialog(null,"Las categorias con mas ventas son:\n"+out);
+                }else{
+                    st= new StringTokenizer(msg,";");
+                    String max1="",max2="",max3="",max4="",max5="";
+                    int  in1=0,in2=0,in3=0,in4=0,in5=0;
+                    while(st.hasMoreTokens()){
+                        String n=st.nextToken();
+                        int nt=Integer.parseInt(st.nextToken());
+                        if(nt>in5){
+                            max1=max2;
+                            max2=max3;
+                            max3=max4;
+                            max4=max5;
+                            max5=n;
+                            in1=in2;
+                            in2=in3;
+                            in3=in4;
+                            in4=in5;
+                            in5=nt;
+                        }else if(nt>in4){
+                            max1=max2;
+                            max2=max3;
+                            max3=max4;
+                            max4=n;
+                            in1=in2;
+                            in2=in3;
+                            in3=in4;
+                            in4=nt;
+                        }else if(nt>in3){
+                            max1=max2;
+                            max2=max3;
+                            max3=n;
+                            in1=in2;
+                            in2=in3;
+                            in3=nt;
+                        }else if(nt>in2){
+                            max1=max2;
+                            max2=n;
+                            in1=in2;
+                            in2=nt;
+                        }else if(nt>in1){
+                            max1=n;
+                            in1=nt;
+                        }
+                    }
+                    out=max5+"->"+in5+"\n"+max4+"->"+in4+"\n"+max3+"->"+in3+"\n"+max2+"->"+in2+"\n"+max1+"->"+in1;
+                    JOptionPane.showMessageDialog(null,"Las 5 categorias con mas ventas son:\n"+out);
+                }
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(WGerente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        if(LaPros.getEmpleados()!=null){
+            Mesero temp=gr.mgestion();
+            if(temp.getMgestionadas()!=0)JOptionPane.showMessageDialog(null,"El mesero con mejor gestion es :\nNombre:"+temp.getNombre()+"\nCC:"+temp.getCc()+"\nCon "+temp.getMgestionadas()+" gestiones");
+            else JOptionPane.showMessageDialog(null,"No se ha gestionado ninguna mesa");
+        }else{
+            JOptionPane.showMessageDialog(null,"No se ha registrado ningun mesero");
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        try {
+            String msg=plMas();
+            if(msg.equals("")){
+                JOptionPane.showMessageDialog(null, "No se ha vendido ningun plato");
+            }else{
+                StringTokenizer st= new StringTokenizer(msg,";");
+                int max=0;
+                String nombre="";
+                while(st.hasMoreTokens()){
+                    String tem=st.nextToken(),can=st.nextToken();
+                    if(max<Integer.parseInt(can)){
+                        nombre=tem;
+                        max=Integer.parseInt(can);
+                    }
+                }
+                JOptionPane.showMessageDialog(null, "El plato mas vendido es\n"+ nombre +"\ncon "+max+" ventas");
+            }
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(WGerente.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(WGerente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         try {
@@ -188,16 +313,72 @@ public class WGerente extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        if(LaPros.getEmpleados()!=null){
-        Mesero temp=gr.mgestion();
-        if(temp.getMgestionadas()!=0)JOptionPane.showMessageDialog(null,"El mesero con mejor gestion es :\n"+temp.getNombre()+"\nCon "+temp.getMgestionadas()+" gestiones");
-        else JOptionPane.showMessageDialog(null,"No se ha gestionado ninguna mesa");
-        }else{
-        JOptionPane.showMessageDialog(null,"No se ha registrado ningun mesero");
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+    private String catMas() throws FileNotFoundException, IOException{
+        BufferedReader br1 = new BufferedReader(new FileReader("Archivos\\Consolidados\\Categorias.txt"));
+    String linea1 = br1.readLine(),registro="";
+    while(linea1!=null){
+        StringTokenizer st= new StringTokenizer(linea1,";");
+        String nombre=st.nextToken();
+        int cant=Integer.parseInt(st.nextToken());
+            if(ver(nombre,registro)){
+                BufferedReader br2 = new BufferedReader(new FileReader("Archivos\\Consolidados\\Categorias.txt"));
+                String linea2 = br2.readLine();
+                int c=0;
+                while(linea2!=null){
+                StringTokenizer st1= new StringTokenizer(linea2,";");
+                String n=st1.nextToken(),can=st1.nextToken();
+                    if(nombre.equals(n)){
+                        c+=Integer.parseInt(can);
+                    }
+                    linea2=br2.readLine();
+                }
+                registro+=nombre+";"+c+";";
+                br2.close();
+            }
+            linea1=br1.readLine();
         }
-    }//GEN-LAST:event_jButton4ActionPerformed
-
+    br1.close();
+        System.out.println(registro);
+    return registro;
+    }
+    private String plMas() throws FileNotFoundException, IOException{
+    BufferedReader br1 = new BufferedReader(new FileReader("Archivos\\Consolidados\\Platos.txt"));
+    String linea1 = br1.readLine(),registro="";
+    while(linea1!=null){
+        StringTokenizer st= new StringTokenizer(linea1,";");
+        String nombre=st.nextToken();
+        int cant=Integer.parseInt(st.nextToken());
+            if(ver(nombre,registro)){
+                BufferedReader br2 = new BufferedReader(new FileReader("Archivos\\Consolidados\\Platos.txt"));
+                String linea2 = br2.readLine();
+                int c=0;
+                while(linea2!=null){
+                StringTokenizer st1= new StringTokenizer(linea2,";");
+                String n=st1.nextToken(),can=st1.nextToken();
+                    if(nombre.equals(n)){
+                        c+=Integer.parseInt(can);
+                    }
+                    linea2=br2.readLine();
+                }
+                registro+=nombre+";"+c+";";
+                br2.close();
+            }
+            linea1=br1.readLine();
+        }
+    br1.close();
+    return registro;
+    }
+    private boolean ver(String name, String registros){
+        StringTokenizer st= new StringTokenizer(registros,";");
+        while(st.hasMoreTokens()){
+            if(name.equals(st.nextToken()))return false;
+            st.nextToken();
+        }
+        return true;
+    }
     /**
      * @param args the command line arguments
      */
@@ -205,7 +386,7 @@ public class WGerente extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

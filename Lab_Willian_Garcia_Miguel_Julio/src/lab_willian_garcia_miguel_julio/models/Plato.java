@@ -32,6 +32,10 @@ public class Plato implements Cloneable {
         this.link = null;
     }
 
+    public String getCat() {
+        return cat;
+    }
+    
     public void setLink(Plato link) {
         this.link = link;
     }
