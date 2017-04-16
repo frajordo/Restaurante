@@ -11,13 +11,15 @@ public class Plato implements Cloneable {
     private int cant;
     private float prec;
     private float time;
+    private String cat;
     private Plato link;
 
-    public Plato(String name, int cant, float prec, float time) {
+    public Plato(String name, int cant, float prec, float time,String cat) {
         this.name = name;
         this.cant = cant;
         this.time = time;
         this.prec = prec;
+        this.cat=cat;
         this.link = null;
     }
 
@@ -26,6 +28,7 @@ public class Plato implements Cloneable {
         this.cant = 0;
         this.time = 0;
         this.prec = 0;
+        this.cat="";
         this.link = null;
     }
 

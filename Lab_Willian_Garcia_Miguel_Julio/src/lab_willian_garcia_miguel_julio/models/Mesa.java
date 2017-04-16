@@ -41,11 +41,33 @@ public class Mesa {
             temp=temp.getLink();
             i++;
         }
+        crearC("Platos");
+        crearC("Categorias");
     }
     public void crearA(int i,boolean c){
             FileWriter fw = null;
             try {
-            File archivo = (c)?new File("Archivos\\Facturas\\Factura"+i+".txt"):new File("Archivos\\Facturas\\FacturaP"+i+".txt");
+            File archivo = (c)?new File("Archivos\\Facturas\\Factura"+i+".txt"):new File("Archivos\\Mesas\\mesa"+i+".txt");
+            fw = new FileWriter(archivo, false);
+            PrintWriter pw = new PrintWriter(fw);
+            escribirFichero(pw,"");
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            } finally {
+                try {
+                    if (fw != null) {
+                        fw.close();
+                    }
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+            }
+    }
+    
+     public void crearC(String msg){
+            FileWriter fw = null;
+            try {
+            File archivo = new File("Archivos\\Consolidados\\"+msg+".txt");
             fw = new FileWriter(archivo, false);
             PrintWriter pw = new PrintWriter(fw);
             escribirFichero(pw,"");

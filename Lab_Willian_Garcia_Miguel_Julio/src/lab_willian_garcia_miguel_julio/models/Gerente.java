@@ -14,15 +14,23 @@ public class Gerente {
     public Gerente() {
     }
     
-    public void listaOrdenadaMesas() {
+    public String platoVendido() {
+        int x = LaPros.getNumerom();
+        for (int i = 0; i < x; i++) {
+        }
+        return "";
     }
-
+    
+    public Mesero mgestion() {
+        
+        return LaPros.getEmpleados().mejorgestor();
+    }
     public float totalVentas() throws FileNotFoundException {
         float total = 0;
         int x = LaPros.getNumerom();
         for (int i = 0; i < x; i++) {
             try {
-             BufferedReader br = new BufferedReader(new FileReader("Archivos\\Facturas\\FacturaP" + (i + 1) + ".txt"));
+             BufferedReader br = new BufferedReader(new FileReader("Archivos\\Mesas\\mesa" + (i + 1) + ".txt"));
              String linea= br.readLine();
                 while (linea != null) {
                     if (!linea.equals("")) {

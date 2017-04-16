@@ -18,15 +18,7 @@ public class JefeCocina {
     }
 
     public boolean VerificarIngredientes(String lineaBuscar, String varaible) {
-
-        int yy = 0;
         int yyy = 0;
-        int contador = 0;
-        int contador2 = 0;
-        int contador3 = 0;
-        int contador4 = 0;
-        int contador5 = 0;
-        int contador6 = 0;
         int uu = 0;
         File archivo = null;
         FileReader fr = null;
@@ -38,14 +30,11 @@ public class JefeCocina {
             archivo = new File("Archivos\\Ingredientes\\I" + varaible + ".txt");
             fr = new FileReader(archivo);
             br = new BufferedReader(fr);
-// Lectura del fichero linea a linea
+        // Lectura del fichero linea a linea
             String linea;
             boolean encontrado = false;
             String lineaEncontrada = null;
-
-            while ((linea = br.readLine()) != null && !encontrado) {
-// buscar la cadena palabra en la linea leida
-                contador = contador + 1;
+            while ((linea = br.readLine()) != null && !encontrado) {// buscar la cadena palabra en la linea leida
                 if (linea.contains(lineaBuscar)) {
                     contador2 = contador2 + 1;
                     encontrado = true;
@@ -62,28 +51,23 @@ public class JefeCocina {
                         temp2 = temp;
                         temp = st2.nextToken();
                         if (i % 2 != 0) {
-                            //temp2 = st2.nextToken();
                             boolean encontrado2 = false;
                             File archivo2 = new File("Archivos\\Provisiones\\Pro.txt");
                             String lineaEncontrada2 = null;
+
                             FileReader fr2 = new FileReader(archivo2);
                             BufferedReader br2 = new BufferedReader(fr2);
                             String linea2;
                             linea2 = br2.readLine();
                             while ((linea2 = br2.readLine()) != null && encontrado2 != true) {
-// buscar la cadena palabra en la linea leida
-                                yy = yy + 1;
-                                System.out.println(temp);
+                            // buscar la cadena palabra en la linea leida
                                 if (linea2.contains(temp)) {
-                                    System.out.println(temp);
                                     lineaEncontrada2 = linea2;
                                     StringTokenizer st3 = new StringTokenizer(lineaEncontrada2, ";");
                                     st3.nextToken();
                                     String h = st3.nextToken();
                                     double V = Integer.parseInt(h);
-                                    double w = Integer.parseInt(temp2);
-                                    System.out.println(V);
-                                    System.out.println(w);
+                                    double w = Intege
                                     if (V > w) {
                                         uu = uu + 1;
                                         System.out.println(uu);
@@ -106,8 +90,7 @@ public class JefeCocina {
                         }
                         i++;
                     }
-                } else {
-                    System.out.println("no existe");
+                }
                 }
             }
 

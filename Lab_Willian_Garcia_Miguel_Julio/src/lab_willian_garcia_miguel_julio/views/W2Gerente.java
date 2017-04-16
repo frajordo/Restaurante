@@ -100,7 +100,7 @@ public class W2Gerente extends javax.swing.JFrame {
     private void Tupdate() throws FileNotFoundException {
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
         try {
-            BufferedReader br = new BufferedReader(new FileReader("Archivos\\Facturas\\FacturaP" + msg + ".txt"));
+            BufferedReader br = new BufferedReader(new FileReader("Archivos\\Mesas\\mesa" + msg + ".txt"));
             String linea = br.readLine();
             float total=0;
             while (linea != null) {
