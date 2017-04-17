@@ -34,6 +34,7 @@ public class WMesero extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Mesero");
         getContentPane().setLayout(null);
 
         jPanel1.setLayout(null);

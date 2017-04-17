@@ -61,6 +61,7 @@ public class WOrden extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Ver Orden");
         getContentPane().setLayout(null);
 
         jPanel1.setLayout(null);
@@ -93,7 +94,7 @@ public class WOrden extends javax.swing.JFrame {
         jLabel1.setBounds(0, 0, 560, 500);
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 1562, 609);
+        jPanel1.setBounds(0, 0, 600, 390);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

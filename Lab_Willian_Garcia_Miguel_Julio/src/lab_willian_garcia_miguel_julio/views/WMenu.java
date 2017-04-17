@@ -57,6 +57,7 @@ public class WMenu extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Menu");
         getContentPane().setLayout(null);
 
         jPanel1.setLayout(null);
@@ -148,7 +149,7 @@ public class WMenu extends javax.swing.JFrame {
         jLabel8.setBounds(-50, 0, 1560, 620);
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 722, 314);
+        jPanel1.setBounds(-3, -3, 860, 360);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

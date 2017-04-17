@@ -107,6 +107,7 @@ public class W2Mesero extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Mesero");
 
         jPanel1.setLayout(null);
 

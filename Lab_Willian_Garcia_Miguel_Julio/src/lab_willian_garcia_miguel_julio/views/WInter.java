@@ -37,7 +37,7 @@ public class WInter extends javax.swing.JFrame {
 
     public WInter() {
         initComponents();
-        this.setSize(588, 429);
+        this.setSize(625, 480);
         this.setResizable(false);
         update();
     }
@@ -59,6 +59,7 @@ public class WInter extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Ventana Interactiva");
         setBackground(new java.awt.Color(251, 248, 198));
         getContentPane().setLayout(null);
 
@@ -98,10 +99,10 @@ public class WInter extends javax.swing.JFrame {
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Fondo.png"))); // NOI18N
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(-410, -170, 1220, 630);
+        jLabel2.setBounds(-410, -170, 1220, 650);
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 588, 429);
+        jPanel1.setBounds(0, 0, 660, 480);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

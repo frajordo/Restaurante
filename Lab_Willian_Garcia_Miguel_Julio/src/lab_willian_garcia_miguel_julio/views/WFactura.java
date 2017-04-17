@@ -130,6 +130,7 @@ public class WFactura extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Factura");
         getContentPane().setLayout(null);
 
         jPanel1.setLayout(null);
@@ -161,7 +162,7 @@ public class WFactura extends javax.swing.JFrame {
         jLabel1.setBounds(-570, 0, 1030, 850);
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 363, 241);
+        jPanel1.setBounds(0, 0, 430, 330);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
