@@ -5,7 +5,7 @@
  */
 package lab_willian_garcia_miguel_julio.models;
 
-public class Plato implements Cloneable {
+public class Plato  {
     
     private String name;
     private int cant;
@@ -103,14 +103,4 @@ public class Plato implements Cloneable {
         }
         return str;
     }
-     @Override
-     public Plato clone(){
-        Plato copia=new Plato();
-        copia.setName(this.getName());
-        copia.setCant(this.getCant());
-        copia.setPrec(this.getPrec());
-        copia.setTime(this.getTime());
-        copia.setLink(this.getLink());
-        return copia;
-     }
 }
