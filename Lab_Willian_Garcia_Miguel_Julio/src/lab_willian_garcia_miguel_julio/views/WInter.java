@@ -146,10 +146,9 @@ if(ordenes!=null){
             }
             ordenes = ordenes.getLink();
             String c="";
-            Jcocina.borrarExistencias(c, msg,c);
+           // Jcocina.borrarExistencias(c, msg,c);
             update();
             ingresarFichero(mesa);
-            //Jcocina.borrarExistencias();
 }
     }//GEN-LAST:event_jButton1ActionPerformed
    
@@ -199,7 +198,7 @@ if(ordenes!=null){
             Plato temp2 = null;
             temp2 = temp.getPedido();
             while (temp2 != null) {
-                msg += temp2.getName() + "," + temp2.getCant() + ","+temp2.getCat();
+                msg += temp2.getName() + "," + temp2.getCant() + ","+temp2.getCat()+",";
                 temp2 = temp2.getLink();
             }
             msg += ";";

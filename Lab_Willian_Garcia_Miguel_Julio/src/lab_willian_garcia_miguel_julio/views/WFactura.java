@@ -92,6 +92,8 @@ public class WFactura extends javax.swing.JFrame {
             }
             linea = br.readLine();
         }
+        modelo.addRow(new Object[]{"", "", "iva", total*0.19});
+        total=total*1.19f;
         modelo.addRow(new Object[]{"", "", "Total", total});
         pw.close();
         fw = new FileWriter("Archivos\\Facturas\\Factura" + mesa + ".txt", false);

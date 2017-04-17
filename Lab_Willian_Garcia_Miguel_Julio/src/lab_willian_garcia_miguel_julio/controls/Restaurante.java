@@ -42,7 +42,6 @@ public class Restaurante {
     
     public void printemple(){
         if (empleados != null) empleados.printMesero();
-        else System.out.println("no hay meseros registrados");
     }
     
     public String busCC(long cc){

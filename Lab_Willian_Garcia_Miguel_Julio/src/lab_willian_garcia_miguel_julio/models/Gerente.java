@@ -35,7 +35,7 @@ public class Gerente {
                 while (linea != null) {
                     if (!linea.equals("")) {
                         StringTokenizer st = new StringTokenizer(linea, ";");
-                        System.out.println(st.nextToken());
+                        st.nextToken();
                             total += Float.parseFloat(st.nextToken()) * Float.parseFloat(st.nextToken());
                     }
                     linea=br.readLine();
