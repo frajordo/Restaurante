@@ -14,15 +14,8 @@ public class Gerente {
     public Gerente() {
     }
     
-    public String platoVendido() {
-        int x = LaPros.getNumerom();
-        for (int i = 0; i < x; i++) {
-        }
-        return "";
-    }
     
     public Mesero mgestion() {
-        
         return LaPros.getEmpleados().mejorgestor();
     }
     public float totalVentas() throws FileNotFoundException {

@@ -54,7 +54,6 @@ public class JefeCocina {
                             boolean encontrado2 = false;
                             File archivo2 = new File("Archivos\\Provisiones\\Pro.txt");
                             String lineaEncontrada2 = null;
-
                             FileReader fr2 = new FileReader(archivo2);
                             BufferedReader br2 = new BufferedReader(fr2);
                             String linea2;
@@ -166,16 +165,10 @@ public class JefeCocina {
 
     public void EcribirFichero(File Ffichero, String SCadena) {
         try {
-            //Si no Existe el fichero lo crea
             if (!Ffichero.exists()) {
                 Ffichero.createNewFile();
             }
-            /*Abre un Flujo de escritura,sobre el fichero con codificacion utf-8. 
-           *Además  en el pedazo de sentencia "FileOutputStream(Ffichero,true)",
-           *true es por si existe el fichero seguir añadiendo texto y no borrar lo que tenia*/
             BufferedWriter Fescribe = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(Ffichero, true), "utf-8"));
-            /*Escribe en el fichero la cadena que recibe la función. 
-           *el string "\r\n" significa salto de linea*/
             Fescribe.write(SCadena + "\r\n");
             //Cierra el flujo de escritura
             Fescribe.close();
