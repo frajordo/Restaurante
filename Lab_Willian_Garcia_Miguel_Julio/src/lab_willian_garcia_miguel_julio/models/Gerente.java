@@ -10,8 +10,8 @@ import java.util.logging.Logger;
 import static lab_willian_garcia_miguel_julio.controls.Lab_Willian_Garcia_Miguel_Julio.LaPros;
 
 public class Gerente {
-
-    public Gerente() {
+    public Gerente instance;
+    private Gerente() {
     }
     
     
@@ -40,4 +40,9 @@ public class Gerente {
         }
         return total;
     }
+    public getInstance():
+    if (instance==null){
+        instance=new Gerente()
+    }
+    return instance
 }
