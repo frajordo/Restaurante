@@ -131,3 +131,5 @@ public class Mesero {
         return Nombre;
     }
 }
+
+#Esta clase necesitaria una interfaz iterador y una clase iterador concreto. Esta tendría el link y sería utilizada por esta clase
